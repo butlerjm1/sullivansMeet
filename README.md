@@ -23,7 +23,7 @@ assets/         the fourteen profile photos
 
 Screens: Discover (`#/discover`), full profile (`#/profile/:id`), Matches (`#/matches`), Messages (`#/messages/:id`), Sullivan Reserve plans and mock checkout (`#/premium`), Hope's profile and settings (`#/hope`).
 
-Everything is front-end state. Refreshing the page resets Hope's day.
+Everything is front-end state. Refreshing the page resets Hope's day. The one exception is the card-size toggle on Discover (comfortable or compact), which is remembered per browser; phones default to compact.
 
 ## Sullivan Reserve
 

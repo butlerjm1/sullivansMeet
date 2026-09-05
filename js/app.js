@@ -31,7 +31,23 @@
     info: '<svg viewBox="0 0 24 24"><path d="M12 2a10 10 0 1 1 0 20 10 10 0 0 1 0-20Zm-1 8v7h2v-7h-2Zm0-3v2h2V7h-2Z"/></svg>',
     ruler: '<svg viewBox="0 0 24 24"><path d="M3 7h18a1 1 0 0 1 1 1v8a1 1 0 0 1-1 1H3a1 1 0 0 1-1-1V8a1 1 0 0 1 1-1Zm1 2v6h16V9h-2v3h-2V9h-2v3h-2V9H10v3H8V9H6v3H4V9Z"/></svg>',
     brief: '<svg viewBox="0 0 24 24"><path d="M9 4h6a2 2 0 0 1 2 2v1h3a2 2 0 0 1 2 2v9a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V9a2 2 0 0 1 2-2h3V6a2 2 0 0 1 2-2Zm0 3h6V6H9v1Z"/></svg>',
+    gridLg: '<svg viewBox="0 0 24 24"><path d="M3 3h8v8H3V3Zm10 0h8v8h-8V3ZM3 13h8v8H3v-8Zm10 0h8v8h-8v-8Z"/></svg>',
+    gridSm: '<svg viewBox="0 0 24 24"><path d="M3 3h5v5H3V3Zm6.5 0h5v5h-5V3ZM16 3h5v5h-5V3ZM3 9.5h5v5H3v-5Zm6.5 0h5v5h-5v-5Zm6.5 0h5v5h-5v-5ZM3 16h5v5H3v-5Zm6.5 0h5v5h-5v-5Zm6.5 0h5v5h-5v-5Z"/></svg>',
   };
+
+  /* ───────────── Card density (comfortable | compact) ─────────────
+     Remembered per browser. Phones default to compact when nothing is saved. */
+  const DENSITY_KEY = "sullivans-meet:density";
+  function loadDensity() {
+    try {
+      const v = localStorage.getItem(DENSITY_KEY);
+      if (v === "compact" || v === "comfortable") return v;
+    } catch (e) { /* storage unavailable */ }
+    return window.innerWidth <= 600 ? "compact" : "comfortable";
+  }
+  function saveDensity(v) {
+    try { localStorage.setItem(DENSITY_KEY, v); } catch (e) { /* ignore */ }
+  }
 
   /* ───────────── State ───────────── */
   const state = {
@@ -62,7 +78,9 @@
     // Sullivan Reserve membership. Reserve Sullivans stay blurred until active.
     reserve: { active: false, plan: null, billing: "annual", since: null },
     pendingScroll: null,
+    density: loadDensity(),
   };
+  const gridClass = () => `grid${state.density === "compact" ? " grid--compact" : ""}`;
 
   SEED_CONVERSATIONS.forEach((c) => {
     state.convos[c.sullivanId] = {
@@ -424,7 +442,7 @@
           <div class="pcard-top">
             <span>${s.likedYou ? `<span class="pill pill--gold">${I.heart} Liked you</span>` : ""}</span>
             <span class="pcard-top-right">
-              <span class="compat">${compatRing(s.compat)} ${s.compat}% match</span>
+              <span class="compat">${compatRing(s.compat)} ${s.compat}%<span class="compat-word"> match</span></span>
               <span class="pill pill--glass pill--dot" style="color:${activeRank(s) === 0 ? "#2f7a58" : "var(--ink-2)"}">${esc(s.lastActive)}</span>
             </span>
           </div>
@@ -464,7 +482,7 @@
           <div class="pcard-top">
             <span>${topLeft}</span>
             <span class="pcard-top-right">
-              <span class="compat">${compatRing(s.compat)} ${s.compat}% match</span>
+              <span class="compat">${compatRing(s.compat)} ${s.compat}%<span class="compat-word"> match</span></span>
               <span class="pill pill--glass pill--dot" style="color:${activeRank(s) === 0 ? "#2f7a58" : "var(--ink-2)"}">${esc(s.lastActive)}</span>
             </span>
           </div>
@@ -515,7 +533,7 @@
     }
     const topPick = f.sort === "recommended" ? list.find((s) => !isLocked(s)) : null;
     const topId = topPick ? topPick.id : null;
-    return `<div class="grid">${list.map((s) => cardHTML(s, s.id === topId)).join("")}</div>`;
+    return `<div class="${gridClass()}">${list.map((s) => cardHTML(s, s.id === topId)).join("")}</div>`;
   }
 
   function renderDiscoverGrid() {
@@ -598,6 +616,10 @@
             <button class="toggle-btn ${f.likedYou ? "is-active" : ""}" data-action="toggle-liked-you">${I.heart} Liked you</button>
           </div>
           <div class="toolbar-right">
+            <div class="segment density-toggle" role="group" aria-label="Card size">
+              <button class="${state.density === "comfortable" ? "is-active" : ""}" data-action="set-density" data-value="comfortable" title="Larger cards" aria-label="Larger cards" aria-pressed="${state.density === "comfortable"}">${I.gridLg}</button>
+              <button class="${state.density === "compact" ? "is-active" : ""}" data-action="set-density" data-value="compact" title="Smaller cards" aria-label="Smaller cards" aria-pressed="${state.density === "compact"}">${I.gridSm}</button>
+            </div>
             <label class="select-wrap">
               <select class="select" id="filter-sort" aria-label="Sort">
                 <option value="recommended" ${f.sort === "recommended" ? "selected" : ""}>Recommended</option>
@@ -702,7 +724,7 @@
             <img class="is-blurred" src="${s.img}" alt="A Reserve Sullivan, blurred">
             <div class="pcard-top">
               <span>${s.likedYou ? `<span class="pill pill--gold">${I.heart} Liked you</span>` : ""}</span>
-              <span class="compat">${compatRing(s.compat)} ${s.compat}% match</span>
+              <span class="compat">${compatRing(s.compat)} ${s.compat}%<span class="compat-word"> match</span></span>
             </div>
             <div class="lock-overlay lock-overlay--lg">
               <span class="lock-glyph">${I.lock}</span>
@@ -808,7 +830,7 @@
             <img src="${s.img}" alt="${esc(s.name)}">
             <div class="pcard-top">
               <span class="pill-stack">${isPremium(s) ? reserveBadge() : ""}${s.likedYou && !matched ? `<span class="pill pill--gold">${I.heart} Liked you</span>` : matched ? `<span class="pill pill--green">${I.check} Matched</span>` : ""}</span>
-              <span class="compat">${compatRing(s.compat)} ${s.compat}% match</span>
+              <span class="compat">${compatRing(s.compat)} ${s.compat}%<span class="compat-word"> match</span></span>
             </div>
             <div class="profile-photo-caption">
               <span class="pill pill--glass pill--dot" style="color:${activeRank(s) === 0 ? "#2f7a58" : "var(--ink-2)"}">${esc(s.lastActive)}</span>
@@ -1498,7 +1520,7 @@
           <h2 class="h2">Behind the rope <span class="count-pill"><b>${prem.length}</b> Reserve Sullivans</span></h2>
           <span class="small muted">Surnames withheld. For now.</span>
         </div>
-        <div class="grid">${prem.map((s) => cardHTML(s)).join("")}</div>
+        <div class="${gridClass()}">${prem.map((s) => cardHTML(s)).join("")}</div>
       </section>
 
       ${plansSectionHTML()}
@@ -1551,7 +1573,7 @@
           <h2 class="h2">Your Reserve Sullivans <span class="count-pill"><b>${prem.length}</b> unlocked</span></h2>
           <span class="small muted">Surnames displayed in full. Deep breath.</span>
         </div>
-        <div class="grid">${prem.map((s) => cardHTML(s)).join("")}</div>
+        <div class="${gridClass()}">${prem.map((s) => cardHTML(s)).join("")}</div>
       </section>
 
       ${plansSectionHTML()}
@@ -1793,6 +1815,20 @@
         $$("[data-action='set-distance']").forEach((c) => c.classList.toggle("is-active", c === el));
         renderDiscoverGrid();
         break;
+      case "set-density": {
+        const v = el.dataset.value === "compact" ? "compact" : "comfortable";
+        if (v === state.density) break;
+        state.density = v;
+        saveDensity(v);
+        $$("[data-action='set-density']").forEach((b) => {
+          const on = b.dataset.value === v;
+          b.classList.toggle("is-active", on);
+          b.setAttribute("aria-pressed", on);
+        });
+        if (route().view === "discover") renderDiscoverGrid();
+        else render();
+        break;
+      }
       case "toggle-liked-you":
         state.filters.likedYou = !state.filters.likedYou;
         el.classList.toggle("is-active", state.filters.likedYou);
