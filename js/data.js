@@ -1,6 +1,6 @@
 // ─────────────────────────────────────────────────────────────
 // Sullivans Meet — data layer
-// Twelve verified Sullivans, hand-vetted by our Nomenclature Team.
+// Thirteen verified Sullivans, hand-vetted by our Nomenclature Team.
 // Three of them are Reserve Sullivans (premium: true) and sit
 // behind the Sullivan Reserve paywall until Hope upgrades.
 // ─────────────────────────────────────────────────────────────
@@ -231,6 +231,31 @@ const SULLIVANS = [
       { q: "Believe it or not, I", a: "Have never once said “let's circle back” and meant it. It's a reflex. Like blinking. Like closing." },
     ],
   },
+  {
+    id: 13,
+    name: "Sullivan Yeehawthorne",
+    age: 31,
+    city: "Amarillo, TX",
+    distance: 15,
+    occupation: "Rancher & Part-Time Rodeo Announcer",
+    height: `6'1"`,
+    compat: 88,
+    intention: "Long-term. Slow. Like a good brisket.",
+    lastActive: "Active 2h ago",
+    img: "assets/sullivan-13.png",
+    likedYou: false,
+    seedMatch: false,
+    bio: "Third-generation rancher, first-generation Yeehawthorne; Granddad changed it from Hawthorne on a dare and nobody's had the heart to change it back. I run 200 head of cattle, announce the county rodeo, and I've been leaning on this porch since about 2019. Come sit.",
+    interests: ["Sunrise chores", "Two-stepping (leads, patiently)", "Naming cows after exes", "Truck radio, one station", "Porch sitting, competitive"],
+    tags: ["Slow talker, quick smile", "Hat stays on", "Knows every dog in town"],
+    fact: "He's named 200 cows and has never repeated a name. The one called Hope was born last spring. He'd like to be clear that this was before he saw your profile.",
+    badge: "Most Likely to Fix Your Fence Unasked",
+    prompts: [
+      { q: "The way to win me over is", a: "Don't ask about the hat. It's a hat. It's on my head. We're past it." },
+      { q: "My simple pleasures", a: "A truck that starts. A calf that stands. Someone who says “Yeehawthorne” all the way through without stopping to laugh in the middle." },
+      { q: "Together, we could", a: "Watch a storm come across the flat from about forty miles out. Takes an hour. I'll bring the chairs." },
+    ],
+  },
 
   // ── Reserve Sullivans (premium) ──
   {
@@ -400,6 +425,11 @@ const RESERVE_FAQ = [
 
 // Replies used once Hope matches a Reserve Sullivan.
 const PERSONA_REPLIES = {
+  13: [
+    "Sorry for the wait. Had a calf on the wrong side of a fence. She's fine. The fence is fine. I'm sitting back down.",
+    "Announced the rodeo tonight. Said your name over the loudspeaker by accident during the barrel racing. Crowd cheered. They didn't know why. I did.",
+    "Truck radio only gets the one station and it played a slow song just now. Thought about you. Thought about it hard enough the dog noticed.",
+  ],
   12: [
     "Love that. Genuinely. I'm going to circle back on it in a voice memo, but the short version is: love that.",
     "Small thing, I just closed on a house. Not for anyone. Just for the feeling. Anyway, how's your week trending?",
@@ -508,6 +538,11 @@ const MATCH_COPY = {
     title: "It's a KnobSlauch!",
     sub: "You and Sullivan KnobSlauch liked each other. He has already told his grandmother. She's thrilled. She married the man who invented a hinge.",
     opener: "HOPE!! Okay. Okay. I'm calm. I've been calm since you matched. Welcome to the Reserve. Do you like doors?",
+  },
+  13: {
+    title: "Yeehaw. Thorne.",
+    sub: "You matched with Sullivan Yeehawthorne. He took his hat off when he saw it, which the ranch hands report has not happened indoors or out since 2019.",
+    opener: "Evenin', Hope. Sullivan Yeehawthorne. Take your time with the last name, it's a long ride. Storm's coming in Thursday if you want to watch it.",
   },
   12: {
     title: "It's a Vandersmooth!",

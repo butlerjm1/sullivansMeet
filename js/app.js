@@ -544,7 +544,7 @@
           <div>
             <div class="eyebrow">${esc(todayLabel())} · Only Sullivans shown</div>
             <h1 class="display">Welcome back, Hope.<br>Your <em>Sullivans</em> are waiting.</h1>
-            <p class="lede">We reviewed 4,212 eligible men in your area and removed everyone not named Sullivan. ${["Zero", "One", "Two", "Three", "Four", "Five", "Six", "Seven", "Eight", "Nine", "Ten", "Eleven", "Twelve"][SULLIVANS.length] || SULLIVANS.length} remain. ${state.reserve.active ? "All of them have been told you're here." : `${premiumSullivans().length} of them are waiting behind a velvet rope.`}</p>
+            <p class="lede">We reviewed 4,212 eligible men in your area and removed everyone not named Sullivan. ${["Zero", "One", "Two", "Three", "Four", "Five", "Six", "Seven", "Eight", "Nine", "Ten", "Eleven", "Twelve", "Thirteen", "Fourteen", "Fifteen"][SULLIVANS.length] || SULLIVANS.length} remain. ${state.reserve.active ? "All of them have been told you're here." : `${premiumSullivans().length} of them are waiting behind a velvet rope.`}</p>
           </div>
           <div class="hero-actions">
             <button class="btn btn-primary btn-lg" data-action="scroll-deck">${I.spark} Browse today's Sullivans</button>
@@ -1049,6 +1049,7 @@
               [6, `<b>Sullivan Grimsby</b> liked your profile. Our systems flagged the compatibility score for manual review. It held.`, "5m ago"],
               [10, `<b>Sullivan Pfefferknuckle</b> liked your profile, then spent forty minutes on a wood-splitting break. He's back. He's pleased.`, "40m ago"],
               [12, `<b>Sullivan Vandersmooth</b> liked your profile and 3,999 others. He would like to connect. He has a guy.`, "1h ago"],
+              [13, `<b>Sullivan Yeehawthorne</b> was verified in your area. Verification took a while. He was on a horse.`, "2h ago"],
               [null, `Your Sullivan Index was recalculated overnight. Still <b>100% Sullivan</b>. No action needed.`, "1h ago"],
               [4, `<b>Sullivan Marchetti</b> sent you a poem. It has stanzas.`, "Tue"],
               [2, `<b>Sullivan Draeger</b> liked your profile. He did not smile while doing so, but he did do it.`, "Tue"],
@@ -1243,6 +1244,7 @@
     10: ["Pancakes as a warning?", "Pepper knuckle. Explain.", "Show me the owl."],
     11: ["Sullivan.", "Do you have a nickname?", "Verify me."],
     12: ["Coffee. Obviously.", "What's the wrong answer?", "Do not put me on the podcast."],
+    13: ["Thursday works.", "Tell me about the hat.", "Which cow is Hope?"],
     default: ["Hi, Sullivan.", "Tell me about the name.", "How's your Saturday, Sullivan?"],
   };
 
@@ -1908,7 +1910,7 @@
   function runSplash() {
     const splash = $("#splash");
     const sub = $("#splash-sub");
-    const lines = ["Curating your Sullivans…", "Removing men named Greg…", "Verifying birth certificates…", "Polishing the velvet rope…", "Twelve Sullivans found. Three are Reserve. One is extremely Sullivan."];
+    const lines = ["Curating your Sullivans…", "Removing men named Greg…", "Verifying birth certificates…", "Polishing the velvet rope…", "Thirteen Sullivans found. Three are Reserve. One is extremely Sullivan."];
     let i = 0;
     const tick = setInterval(() => {
       i++;
