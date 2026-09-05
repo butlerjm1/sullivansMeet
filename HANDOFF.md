@@ -1,6 +1,6 @@
 # Sullivans Meet — Handoff
 
-Updated with every commit. Read this first if you're picking the project up cold.
+Updated with every commit. Read this first if you're picking the project up cold. The newest commit-log row is labeled `HEAD`; the following commit replaces that with the real hash.
 
 ## Where things live
 
@@ -37,7 +37,8 @@ Deploys are automatic: every push to `main` goes to production, other branches g
 | `fd978dd` | Initial import: static site, Reserve tier, plans page, mock checkout, 11 Sullivans |
 | `10c0d73` | Ignore Vercel local files (`.vercel`, `.env*`) |
 | `8f3a315` | Add Sullivan Vandersmooth (id 12), realtor and podcast host, Scottsdale |
-| `dd8907e` | Add Sullivan Yeehawthorne (id 13), rancher and rodeo announcer, Amarillo. Add this handoff. |
+| `2383836` | Add Sullivan Yeehawthorne (id 13), rancher and rodeo announcer, Amarillo. Add this handoff. |
+| `HEAD` | Fix handoff commit-log convention: newest row is `HEAD`, its hash is filled in by the next commit. |
 
 ## Working conventions
 
