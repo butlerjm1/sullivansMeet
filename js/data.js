@@ -1,6 +1,6 @@
 // ─────────────────────────────────────────────────────────────
 // Sullivans Meet — data layer
-// Thirteen verified Sullivans, hand-vetted by our Nomenclature Team.
+// Fourteen verified Sullivans, hand-vetted by our Nomenclature Team.
 // Three of them are Reserve Sullivans (premium: true) and sit
 // behind the Sullivan Reserve paywall until Hope upgrades.
 // ─────────────────────────────────────────────────────────────
@@ -256,6 +256,32 @@ const SULLIVANS = [
       { q: "Together, we could", a: "Watch a storm come across the flat from about forty miles out. Takes an hour. I'll bring the chairs." },
     ],
   },
+  {
+    id: 14,
+    name: "Sullivan O'Sullivan",
+    age: 34,
+    city: "Cork, Ireland",
+    distance: 4600,
+    occupation: "Publican & Under-12 Hurling Coach",
+    height: `5'10"`,
+    compat: 90,
+    intention: "Long-term. Or at least the length of a good session.",
+    lastActive: "Active now (it's 2am there)",
+    img: "assets/sullivan-14.png",
+    likedYou: false,
+    likesBack: true,
+    seedMatch: false,
+    bio: "Publican in Cork. Sixth-generation Ó Súilleabháin, which is Sullivan in Irish, which makes me Sullivan Sullivan in two languages, which the Bureau tells me is a first. I coach under-12 hurling and lose every week with tremendous dignity. Yes, the jumper is pink. My mam knit it. Go on.",
+    interests: ["Hurling (coaching, badly)", "Sea swims in December", "Trad sessions, late", "Talking to absolutely anyone", "Being from Cork, aggressively"],
+    tags: ["Laughs with his whole head", "Will know your cousin", "Grand, honestly"],
+    fact: "His birth certificate says Ó Súilleabháin. His passport says O'Sullivan. The Bureau of Sullivan Affairs verified both, then took the afternoon off.",
+    badge: "Sullivan of Origin",
+    prompts: [
+      { q: "You should message me if", a: "You've ever been told to “go on” and correctly understood it as an entire conversation." },
+      { q: "My most controversial opinion", a: "Americans made a website about my surname and I'm only finding out now. I've read the whole thing. Ye did well." },
+      { q: "First round is on me if", a: "You can say Ó Súilleabháin. Second round if you can spell it. There is no third round; you'll have won the pub." },
+    ],
+  },
 
   // ── Reserve Sullivans (premium) ──
   {
@@ -425,6 +451,11 @@ const RESERVE_FAQ = [
 
 // Replies used once Hope matches a Reserve Sullivan.
 const PERSONA_REPLIES = {
+  14: [
+    "The lads in the pub want to know if you're real. I said you are. They want proof. Send a photo of your weather.",
+    "Looked up Sullivan, Illinois to see if it's a real place. It is. There's a lad there says he's more Sullivan than me. We'll see about that.",
+    "Mam says hello. Mam knit the jumper. Mam has opinions about the website. Mam is, on balance, in favour.",
+  ],
   13: [
     "Sorry for the wait. Had a calf on the wrong side of a fence. She's fine. The fence is fine. I'm sitting back down.",
     "Announced the rodeo tonight. Said your name over the loudspeaker by accident during the barrel racing. Crowd cheered. They didn't know why. I did.",
@@ -538,6 +569,11 @@ const MATCH_COPY = {
     title: "It's a KnobSlauch!",
     sub: "You and Sullivan KnobSlauch liked each other. He has already told his grandmother. She's thrilled. She married the man who invented a hinge.",
     opener: "HOPE!! Okay. Okay. I'm calm. I've been calm since you matched. Welcome to the Reserve. Do you like doors?",
+  },
+  14: {
+    title: "It's a Sullivan. From the source.",
+    sub: "You matched with Sullivan O'Sullivan, 4,600 miles away in Cork. He's told the entire pub. The pub has told the parish.",
+    opener: "Howya Hope. Sullivan O'Sullivan, Cork. It's half two in the morning here and I'm not a bit tired. Tell me everything.",
   },
   13: {
     title: "Yeehaw. Thorne.",

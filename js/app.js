@@ -327,8 +327,8 @@
 
   function scheduleLikeBack(id) {
     const s = byId(id);
-    // Odd-numbered Sullivans are quick to like back. It's a personality thing.
-    if (id % 2 === 0) return;
+    // Odd-numbered Sullivans are quick to like back. It's a personality thing. `likesBack: true` opts an even one in.
+    if (id % 2 === 0 && !s.likesBack) return;
     const t = setTimeout(() => {
       if (!isLiked(id) || isMatched(id)) return;
       if (state.modalOpen) {
@@ -402,7 +402,7 @@
   function visibleSullivans() {
     const f = state.filters;
     let list = SULLIVANS.filter((s) => !isLiked(s.id) && !isPassed(s.id) && !state.newMatches.has(s.id));
-    list = list.filter((s) => s.distance <= f.distance);
+    if (f.distance < 99) list = list.filter((s) => s.distance <= f.distance); // 99 means "Anywhere", Cork included
     if (f.intention !== "all") list = list.filter((s) => intentKeys(s).includes(f.intention));
     if (f.likedYou) list = list.filter((s) => s.likedYou);
     const sorters = {
@@ -435,7 +435,7 @@
           </div>
           <div class="pcard-caption">
             <h3 class="pcard-name">Sullivan ${redacted(surname(s))} <span>${s.age}</span></h3>
-            <div class="pcard-meta"><span>${esc(s.occupation)}</span><span class="dot">·</span><span>${esc(s.city)}</span><span class="dot">·</span><span>${s.distance} mi</span></div>
+            <div class="pcard-meta"><span>${esc(s.occupation)}</span><span class="dot">·</span><span>${esc(s.city)}</span><span class="dot">·</span><span>${s.distance.toLocaleString()} mi</span></div>
           </div>
         </div>
         <div class="pcard-body">
@@ -470,7 +470,7 @@
           </div>
           <div class="pcard-caption">
             <h3 class="pcard-name">${esc(first(s))} ${esc(surname(s))} <span>${s.age}</span> ${verifiedBadge("")}</h3>
-            <div class="pcard-meta"><span>${esc(s.occupation)}</span><span class="dot">·</span><span>${esc(s.city)}</span><span class="dot">·</span><span>${s.distance} mi</span></div>
+            <div class="pcard-meta"><span>${esc(s.occupation)}</span><span class="dot">·</span><span>${esc(s.city)}</span><span class="dot">·</span><span>${s.distance.toLocaleString()} mi</span></div>
           </div>
         </div>
         <div class="pcard-body">
@@ -555,7 +555,7 @@
           <div class="stat stat--accent">
             <span class="stat-label">Sullivans near you</span>
             <span class="stat-value"><span id="stat-near">${visibleSullivans().length}</span></span>
-            <span class="stat-sub">Within 15 miles, all verified</span>
+            <span class="stat-sub">${SULLIVANS.some((s) => s.distance > 99) ? "Mostly within 15 miles. One is in Ireland." : "Within 15 miles, all verified"}</span>
           </div>
           <div class="stat">
             <span class="stat-label">Named Sullivan</span>
@@ -735,7 +735,7 @@
             <div class="profile-sub">
               ${verifiedBadge()}
               <span class="dot">·</span>
-              <span>${esc(s.city)}, ${s.distance} miles away</span>
+              <span>${esc(s.city)}, ${s.distance.toLocaleString()} miles away</span>
               <span class="dot">·</span>
               <span>${esc(s.intention)}</span>
             </div>
@@ -836,7 +836,7 @@
             <div class="profile-sub">
               ${verifiedBadge()}
               <span class="dot">·</span>
-              <span>${I.pin ? "" : ""}${esc(s.city)}, ${s.distance} miles away</span>
+              <span>${I.pin ? "" : ""}${esc(s.city)}, ${s.distance.toLocaleString()} miles away</span>
               <span class="dot">·</span>
               <span>${esc(s.intention)}</span>
             </div>
@@ -1050,6 +1050,7 @@
               [10, `<b>Sullivan Pfefferknuckle</b> liked your profile, then spent forty minutes on a wood-splitting break. He's back. He's pleased.`, "40m ago"],
               [12, `<b>Sullivan Vandersmooth</b> liked your profile and 3,999 others. He would like to connect. He has a guy.`, "1h ago"],
               [13, `<b>Sullivan Yeehawthorne</b> was verified in your area. Verification took a while. He was on a horse.`, "2h ago"],
+              [14, `<b>Sullivan O'Sullivan</b> was verified in Cork, Ireland. The Bureau's first international case. Both spellings held.`, "3h ago"],
               [null, `Your Sullivan Index was recalculated overnight. Still <b>100% Sullivan</b>. No action needed.`, "1h ago"],
               [4, `<b>Sullivan Marchetti</b> sent you a poem. It has stanzas.`, "Tue"],
               [2, `<b>Sullivan Draeger</b> liked your profile. He did not smile while doing so, but he did do it.`, "Tue"],
@@ -1245,6 +1246,7 @@
     11: ["Sullivan.", "Do you have a nickname?", "Verify me."],
     12: ["Coffee. Obviously.", "What's the wrong answer?", "Do not put me on the podcast."],
     13: ["Thursday works.", "Tell me about the hat.", "Which cow is Hope?"],
+    14: ["Go on.", "Say it in Irish.", "Tell Mam hello."],
     default: ["Hi, Sullivan.", "Tell me about the name.", "How's your Saturday, Sullivan?"],
   };
 
@@ -1910,7 +1912,7 @@
   function runSplash() {
     const splash = $("#splash");
     const sub = $("#splash-sub");
-    const lines = ["Curating your Sullivans…", "Removing men named Greg…", "Verifying birth certificates…", "Polishing the velvet rope…", "Thirteen Sullivans found. Three are Reserve. One is extremely Sullivan."];
+    const lines = ["Curating your Sullivans…", "Removing men named Greg…", "Verifying birth certificates…", "Polishing the velvet rope…", "Fourteen Sullivans found. Three are Reserve. One is Irish."];
     let i = 0;
     const tick = setInterval(() => {
       i++;
