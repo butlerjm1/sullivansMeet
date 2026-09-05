@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Sullivans Meet — The right man. The right name.</title>
+  <meta name="description" content="Sullivans Meet — the world's first dating platform exclusively for men named Sullivan." />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,500;9..144,600;9..144,700&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="css/styles.css" />
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><rect width='100' height='100' rx='24' fill='%23B4472F'/><text x='50' y='71' font-size='62' text-anchor='middle' fill='%23FBF6EE' font-family='Georgia,serif' font-weight='bold'>S</text></svg>" />
+</head>
+<body>
+
+  <!-- Splash -->
+  <div class="splash" id="splash" aria-hidden="true">
+    <div class="splash-inner">
+      <div class="logo-mark logo-mark--lg">S</div>
+      <div class="splash-word">Sullivans Meet</div>
+      <div class="splash-sub" id="splash-sub">Curating your Sullivans…</div>
+    </div>
+  </div>
+
+  <!-- Header -->
+  <header class="site-header">
+    <div class="header-inner">
+      <a class="brand" href="#" data-nav="discover">
+        <span class="logo-mark">S</span>
+        <span class="brand-text">
+          <span class="brand-name">Sullivans Meet</span>
+          <span class="brand-tag">The right man. The right name.</span>
+        </span>
+      </a>
+
+      <nav class="main-nav" aria-label="Primary">
+        <button class="nav-link is-active" data-nav="discover">
+          <svg viewBox="0 0 24 24"><path d="M12 2a10 10 0 1 0 0 20 10 10 0 0 0 0-20Zm4.2 6.3-1.7 4.6a1.5 1.5 0 0 1-.9.9l-4.6 1.7a.5.5 0 0 1-.6-.6l1.7-4.6a1.5 1.5 0 0 1 .9-.9l4.6-1.7a.5.5 0 0 1 .6.6ZM12 13.1a1.1 1.1 0 1 0 0-2.2 1.1 1.1 0 0 0 0 2.2Z"/></svg>
+          <span>Discover</span>
+        </button>
+        <button class="nav-link" data-nav="matches">
+          <svg viewBox="0 0 24 24"><path d="M12 21s-7.5-4.7-10-9.3C.5 8 2.3 4.5 5.9 4.1c2-.2 3.9.8 5 2.4a.13.13 0 0 0 .2 0c1.1-1.6 3-2.6 5-2.4 3.6.4 5.4 3.9 3.9 7.6C17.5 16.3 12 21 12 21Z"/></svg>
+          <span>Matches</span>
+          <span class="nav-badge" id="badge-matches" hidden></span>
+        </button>
+        <button class="nav-link" data-nav="messages">
+          <svg viewBox="0 0 24 24"><path d="M4 3h16a2 2 0 0 1 2 2v11a2 2 0 0 1-2 2H9l-4.6 3.7A.8.8 0 0 1 3 21V5a2 2 0 0 1 1-2Z" transform="translate(0 0)"/><path d="M12 4a8 8 0 0 0-6.9 12l-1 3.5a.6.6 0 0 0 .8.7l3.6-1.1A8 8 0 1 0 12 4Z"/></svg>
+          <span>Messages</span>
+          <span class="nav-badge" id="badge-messages" hidden></span>
+        </button>
+        <button class="nav-link nav-link--reserve" data-nav="premium">
+          <svg viewBox="0 0 24 24"><path d="M3 8l4.5 4L12 5l4.5 7L21 8l-2 11H5L3 8Zm2.4 9h13.2l.9-5.7-2.7 2.4L12 8.8l-4.8 4.9-2.7-2.4.9 5.7Z"/></svg>
+          <span>Reserve</span>
+        </button>
+        <button class="nav-link" data-nav="hope">
+          <svg viewBox="0 0 24 24"><path d="M12 12a4.5 4.5 0 1 0 0-9 4.5 4.5 0 0 0 0 9Zm0 2.2c-4 0-8 2-8 5V21h16v-1.8c0-3-4-5-8-5Z"/></svg>
+          <span>Profile</span>
+        </button>
+      </nav>
+
+      <button class="hope-chip" data-nav="hope" title="Your profile">
+        <span class="hope-avatar">H</span>
+        <span class="hope-chip-text">
+          <span class="hope-chip-name">Hope</span>
+          <span class="hope-chip-plan" id="hope-chip-plan">Sullivan+ Platinum</span>
+        </span>
+      </button>
+    </div>
+  </header>
+
+  <!-- App views render here -->
+  <main id="view" class="view"></main>
+
+  <footer class="site-footer">
+    <div class="footer-inner">
+      <div class="footer-brand"><span class="logo-mark logo-mark--sm">S</span> Sullivans Meet, Inc.</div>
+      <p class="footer-line">We searched thousands of men and removed everyone not named Sullivan. You're welcome.</p>
+      <p class="footer-fine">© 2026 Sullivans Meet · Est. the moment Hope mentioned it · Names verified by the Bureau of Sullivan Affairs · No Sullivans were renamed in the making of this platform</p>
+    </div>
+  </footer>
+
+  <!-- Mobile tab bar -->
+  <nav class="tab-bar" aria-label="Primary mobile">
+    <button class="tab-link is-active" data-nav="discover">
+      <svg viewBox="0 0 24 24"><path d="M12 2a10 10 0 1 0 0 20 10 10 0 0 0 0-20Zm4.2 6.3-1.7 4.6a1.5 1.5 0 0 1-.9.9l-4.6 1.7a.5.5 0 0 1-.6-.6l1.7-4.6a1.5 1.5 0 0 1 .9-.9l4.6-1.7a.5.5 0 0 1 .6.6Z"/></svg>
+      <span>Discover</span>
+    </button>
+    <button class="tab-link" data-nav="matches">
+      <svg viewBox="0 0 24 24"><path d="M12 21s-7.5-4.7-10-9.3C.5 8 2.3 4.5 5.9 4.1c2-.2 3.9.8 5 2.4a.13.13 0 0 0 .2 0c1.1-1.6 3-2.6 5-2.4 3.6.4 5.4 3.9 3.9 7.6C17.5 16.3 12 21 12 21Z"/></svg>
+      <span>Matches</span>
+      <span class="nav-badge nav-badge--tab" id="badge-matches-tab" hidden></span>
+    </button>
+    <button class="tab-link" data-nav="messages">
+      <svg viewBox="0 0 24 24"><path d="M12 4a8 8 0 0 0-6.9 12l-1 3.5a.6.6 0 0 0 .8.7l3.6-1.1A8 8 0 1 0 12 4Z"/></svg>
+      <span>Messages</span>
+      <span class="nav-badge nav-badge--tab" id="badge-messages-tab" hidden></span>
+    </button>
+    <button class="tab-link tab-link--reserve" data-nav="premium">
+      <svg viewBox="0 0 24 24"><path d="M3 8l4.5 4L12 5l4.5 7L21 8l-2 11H5L3 8Zm2.4 9h13.2l.9-5.7-2.7 2.4L12 8.8l-4.8 4.9-2.7-2.4.9 5.7Z"/></svg>
+      <span>Reserve</span>
+    </button>
+    <button class="tab-link" data-nav="hope">
+      <svg viewBox="0 0 24 24"><path d="M12 12a4.5 4.5 0 1 0 0-9 4.5 4.5 0 0 0 0 9Zm0 2.2c-4 0-8 2-8 5V21h16v-1.8c0-3-4-5-8-5Z"/></svg>
+      <span>Profile</span>
+    </button>
+  </nav>
+
+  <!-- Overlays -->
+  <div id="overlay-root"></div>
+  <div id="toast-root" class="toast-root" aria-live="polite"></div>
+
+  <script src="js/data.js"></script>
+  <script src="js/app.js"></script>
+</body>
+</html>

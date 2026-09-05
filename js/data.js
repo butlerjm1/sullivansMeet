@@ -1,0 +1,517 @@
+// ─────────────────────────────────────────────────────────────
+// Sullivans Meet — data layer
+// Eleven verified Sullivans, hand-vetted by our Nomenclature Team.
+// Three of them are Reserve Sullivans (premium: true) and sit
+// behind the Sullivan Reserve paywall until Hope upgrades.
+// ─────────────────────────────────────────────────────────────
+
+const SULLIVANS = [
+  {
+    id: 1,
+    name: "Sullivan Pemberly",
+    age: 31,
+    city: "Portland, OR",
+    distance: 3,
+    occupation: "Landscape Architect",
+    height: `6'0"`,
+    compat: 91,
+    intention: "Long-term relationship",
+    lastActive: "Active today",
+    img: "assets/sullivan-1.png",
+    likedYou: false,
+    seedMatch: false,
+    bio: "I design public parks for a living, which means I know exactly where all the good benches are. Looking for someone to sit on them with. I make a genuinely excellent frittata and I will not elaborate.",
+    interests: ["Hiking", "Ceramics", "Farmers markets", "Trail running", "Houseplants (47)"],
+    tags: ["Golden retriever energy", "Morning person", "Plant dad"],
+    fact: "Has never once gone by “Sully.” Not even in college.",
+    badge: "Most Likely to Remember Your Coffee Order",
+    prompts: [
+      { q: "The way to win me over is", a: "Ask me about native grasses. I'm serious. I have slides." },
+      { q: "My simple pleasures", a: "First coffee outside. Rain on a tent. When someone spells Sullivan right on the first try." },
+      { q: "Together, we could", a: "Adopt a dog and argue gently about what to name him. (It's Sullivan Jr. It was always going to be Sullivan Jr.)" },
+    ],
+  },
+  {
+    id: 2,
+    name: "Sullivan Draeger",
+    age: 38,
+    city: "Chicago, IL",
+    distance: 11,
+    occupation: "Firefighter, Station 41",
+    height: `6'2"`,
+    compat: 87,
+    intention: "Long-term, open to short",
+    lastActive: "Active 1h ago",
+    img: "assets/sullivan-2.png",
+    likedYou: true,
+    seedMatch: false,
+    bio: "Fourteen years on the job. I make my own hot sauce, I've read every book ever written about Shackleton, and my resting face is not a mood — it's a face. I promise I'm delightful.",
+    interests: ["Boxing", "Cast-iron cooking", "Polar expedition history", "Motorcycles", "Chess"],
+    tags: ["Intense but soft", "Great in a crisis", "Hot sauce guy"],
+    fact: "Once carried a golden retriever down four flights of stairs. The dog's name? Also Sullivan.",
+    badge: "Sullivan of the Month — August",
+    prompts: [
+      { q: "Don't hate me if I", a: "Look like I'm angry in every photo. My mother says I have “a serious face.” She's right. She has it too." },
+      { q: "I'll know it's time to delete this app when", a: "Someone beats me at chess and doesn't gloat about it." },
+      { q: "A shower thought I recently had", a: "There is no non-intense way to be named Sullivan Draeger. I've made peace with it." },
+    ],
+  },
+  {
+    id: 3,
+    name: "Sullivan St. Croix",
+    age: 30,
+    city: "New York, NY",
+    distance: 7,
+    occupation: "Working Actor",
+    height: `6'1"`,
+    compat: 84,
+    intention: "Figuring it out, honestly",
+    lastActive: "Active now",
+    img: "assets/sullivan-3.png",
+    likedYou: false,
+    seedMatch: true,
+    bio: "Yes, this is what I actually look like. No, I don't know how to make that less weird. Currently playing “Paramedic #2” on a show you've definitely seen. Looking for something real — ideally with someone who'll run lines with me.",
+    interests: ["Theater", "Rooftop films", "Espresso", "Stage fencing", "Walks that become monologues"],
+    tags: ["Dramatic (professionally)", "Espresso snob", "Will run lines"],
+    fact: "His headshot has its own agent.",
+    badge: "Suspiciously Photogenic",
+    prompts: [
+      { q: "My most controversial opinion", a: "Musicals are just arguments that got out of hand. I say this with love. I've been in nine." },
+      { q: "Two truths and a lie", a: "I've been in a toothpaste commercial. I can cry on command. I've considered going by a name other than Sullivan." },
+      { q: "Green flags I look for", a: "Laughs at movies. Kind to waiters. Pronounces “Sullivan” with the reverence it deserves." },
+    ],
+  },
+  {
+    id: 4,
+    name: "Sullivan Marchetti",
+    age: 33,
+    city: "Austin, TX",
+    distance: 5,
+    occupation: "Poet & Wine Bar Owner",
+    height: `5'10"`,
+    compat: 89,
+    intention: "Long-term relationship",
+    lastActive: "Active 20m ago",
+    img: "assets/sullivan-4.png",
+    likedYou: false,
+    seedMatch: true,
+    bio: "I own a small natural wine bar and write poetry my regulars are legally required to hear. The mustache is not ironic. It has a name. (It's Sullivan.)",
+    interests: ["Natural wine", "Letterpress printing", "Vinyl", "Bocce", "Writing in the second person"],
+    tags: ["Hopeless romantic", "Mustache curator", "Will write about you"],
+    fact: "Wrote a 40-page chapbook titled “Sullivan: A Name in Four Seasons.” It sold out. Twice.",
+    badge: "Most Poetic Sullivan, 3 Years Running",
+    prompts: [
+      { q: "You should message me if", a: "You've ever sent a text and thought, “honestly, that was basically a poem.”" },
+      { q: "My love language is", a: "Pouring you something and saying “okay, this one's weird, trust me.”" },
+      { q: "I'm weirdly attracted to", a: "People who read the last page of a book first. Chaos. Beautiful chaos." },
+    ],
+  },
+  {
+    id: 5,
+    name: "Sullivan Deveraux",
+    age: 25,
+    city: "Atlanta, GA",
+    distance: 9,
+    occupation: "Music Producer",
+    height: `5'11"`,
+    compat: 82,
+    intention: "Something serious, no rush",
+    lastActive: "Active now",
+    img: "assets/sullivan-5.png",
+    likedYou: false,
+    seedMatch: true,
+    bio: "I produce records and I'm building a studio out of an old dry cleaner's. I know this photo reads a little serious — my photographer said “don't smile, it's editorial.” I have since fired the photographer.",
+    interests: ["Studio nights", "Vintage synths", "Pickup basketball", "Anime", "Cooking for 12 when 3 show up"],
+    tags: ["Night owl", "Feeds everyone", "Certified hitmaker (pending)"],
+    fact: "His first EP charted at #1 in one (1) Scandinavian country. He will not say which.",
+    badge: "Rising Sullivan — Class of 2026",
+    prompts: [
+      { q: "Believe it or not, I", a: "Am the youngest of six. All boys. I was the only Sullivan. It built character." },
+      { q: "First round is on me if", a: "You can name any song from before 2005. Any song. The bar is on the floor." },
+      { q: "One thing I'd like to know about you", a: "How do you feel about hearing the same 8 seconds of a song 300 times in a row. Be honest." },
+    ],
+  },
+  {
+    id: 6,
+    name: "Sullivan Grimsby",
+    age: 41,
+    city: "Milwaukee, WI",
+    distance: 14,
+    occupation: "Municipal Water Quality Supervisor",
+    height: `5'9"`,
+    compat: 98,
+    intention: "Marriage. I have a spreadsheet.",
+    lastActive: "Active 5m ago",
+    img: "assets/sullivan-6.png",
+    likedYou: true,
+    seedMatch: false,
+    bio: "I keep this city's water clean and my calendar cleaner. Regional semi-finalist, Great Lakes Beard & Whisker Society (Freestyle Sideburns division). I own one tie and I am wearing it.",
+    interests: ["Homebrewing", "Curling", "Model trains (N scale, don't start)", "Trivia nights", "Smoking brisket"],
+    tags: ["Unexpectedly hilarious", "Extremely reliable", "Sideburn architect"],
+    fact: "Our algorithm had never produced a compatibility score this high. Engineering checked twice, then went quiet. Then Sullivan Sullivan signed up, and engineering asked for a raise.",
+    badge: "Highest Compatibility, Non-Sullivan Surname Division",
+    prompts: [
+      { q: "A fact about me that surprises people", a: "I'm the reigning trivia champion at three separate bars. I've been banned from a fourth. For winning." },
+      { q: "The best way to ask me out is", a: "Directly. I once failed to realize a woman was flirting with me for eleven years. She's married now. To a man named Greg." },
+      { q: "I take pride in", a: "My water quality reports and my sideburns, in that order. Some days the order flips." },
+    ],
+  },
+  {
+    id: 10,
+    name: "Sullivan Pfefferknuckle",
+    age: 36,
+    city: "Boise, ID",
+    distance: 12,
+    occupation: "Artisanal Firewood Curator",
+    height: `5'10"`,
+    compat: 86,
+    intention: "Long-term. I've already built the shelf for your stuff.",
+    lastActive: "Active 40m ago",
+    img: "assets/sullivan-10.png",
+    likedYou: true,
+    seedMatch: false,
+    bio: "I sell firewood to people who could just buy firewood, and I make it feel like a decision. This is my one flannel. I own it in six colors. The goatee is load-bearing; I've been told the smile does most of the work anyway.",
+    interests: ["Splitting wood (recreationally)", "Board games with too many rules", "Diner breakfasts", "Whittling small owls", "Knowing which tree that is"],
+    tags: ["Warm like a stove", "Flannel lifer", "Will fix your wobbly chair"],
+    fact: "Pfefferknuckle is Bavarian and translates loosely to “pepper knuckle.” Nobody in the family knows why. They've stopped asking.",
+    badge: "Coziest Sullivan, Uncontested",
+    prompts: [
+      { q: "You should message me if", a: "You've ever said “I'm fine” while carrying eleven grocery bags in one trip. I respect that. I'll take six of them." },
+      { q: "Don't hate me if I", a: "Correct your kindling technique. I'll do it kindly. It's the only way I know how to do anything." },
+      { q: "I'm weirdly attracted to", a: "People who read the board game rules out loud in a voice. Any voice. Commit to the voice." },
+    ],
+  },
+  {
+    id: 11,
+    name: "Sullivan Sullivan",
+    age: 35,
+    city: "Sullivan, IL",
+    distance: 13,
+    occupation: "Name Verifier, Bureau of Sullivan Affairs",
+    height: `5'11"`,
+    compat: 100,
+    intention: "Long-term. Obviously.",
+    lastActive: "Active now",
+    img: "assets/sullivan-11.png",
+    likedYou: false,
+    seedMatch: false,
+    bio: "Sullivan Sullivan. Middle name Sullivan. I'm from Sullivan, Illinois, I work at the Bureau of Sullivan Affairs, and I verified my own name, which was awkward for everyone. This is my face. It does one thing.",
+    interests: ["Sullivan County (all six of them)", "Standing very still", "Passport photos", "Genealogy (brief)", "Being Sullivan"],
+    tags: ["Maximum Sullivan", "Zero surprises", "Blinks on schedule"],
+    fact: "Full legal name: Sullivan Sullivan Sullivan. His parents met at a Sullivan family reunion. They were not related. They checked. Twice.",
+    badge: "100% Sullivan. Literally.",
+    prompts: [
+      { q: "Two truths and a lie", a: "My first name is Sullivan. My last name is Sullivan. I have, at some point, been called something else." },
+      { q: "The way to win me over is", a: "Say my name. Any part of it. You cannot get it wrong. That's the whole appeal." },
+      { q: "A fact about me that surprises people", a: "I have a nickname. It's Sullivan." },
+    ],
+  },
+
+  // ── Reserve Sullivans (premium) ──
+  {
+    id: 7,
+    name: "Sullivan Chudwick",
+    age: 34,
+    city: "Nantucket, MA",
+    distance: 6,
+    occupation: "Yacht Sommelier",
+    height: `6'1"`,
+    compat: 94,
+    intention: "Long-term, ideally on a boat",
+    lastActive: "Active now",
+    img: "assets/sullivan-7.png",
+    likedYou: false,
+    seedMatch: false,
+    premium: true,
+    teaser: "His bio is three sentences long and, we're told, devastating. Reserve members may read it.",
+    bio: "I pair wines with vessels. Yes, that's a job. Yes, it pays for the coat. I'm told I photograph like a man with a secret, and I do: I'm allergic to shellfish, which in my line of work is career-limiting.",
+    interests: ["Sailing", "Peacoats (11)", "Brooding on piers", "Amateur meteorology", "Oysters, tragically"],
+    tags: ["Smolders professionally", "Owns a pier", "Fluent in Cabernet"],
+    fact: "Chudwick is an old family name. The family has been asked about it. The family has declined to comment.",
+    badge: "Reserve Sullivan · Most Smoldering",
+    prompts: [
+      { q: "The way to win me over is", a: "Look me in the eye and say “Chudwick” without smiling. No one has managed it. I'm rooting for you." },
+      { q: "My simple pleasures", a: "Fog. Wool. A wine that tastes faintly of dock. The word “Sullivan” said inside a lighthouse." },
+      { q: "Together, we could", a: "Rename the boat. It's currently called The Chudwick. It was a gift. I hate it." },
+    ],
+  },
+  {
+    id: 8,
+    name: "Sullivan KnobSlauch",
+    age: 29,
+    city: "San Diego, CA",
+    distance: 4,
+    occupation: "Door Hardware Heir",
+    height: `5'11"`,
+    compat: 92,
+    intention: "Marriage-minded, aggressively cheerful",
+    lastActive: "Active now",
+    img: "assets/sullivan-8.png",
+    likedYou: true,
+    seedMatch: false,
+    premium: true,
+    teaser: "He has already liked your profile. He would like you to know he's very excited. We've asked him to wait.",
+    bio: "Fourth-generation KnobSlauch. Grandpa invented a hinge. I smile like this all the time — it's not for the photo. I run marathons for fun and I cry at commercials, also for fun. Please don't Google my last name at work.",
+    interests: ["Marathons", "Golden hour", "Antique doorknobs (professionally)", "Karaoke (Céline only)", "Remembering birthdays"],
+    tags: ["Relentlessly positive", "Hinge royalty", "Will remember your mom's name"],
+    fact: "The KnobSlauch family crest is a doorknob. The motto translates, roughly, to “Turn Gently.”",
+    badge: "Reserve Sullivan · Most Enthusiastic",
+    prompts: [
+      { q: "Don't hate me if I", a: "Say my full name at restaurants. Loudly. Proudly. The host always asks me to spell it and I always do, with joy." },
+      { q: "I'll know it's time to delete this app when", a: "Someone says “KnobSlauch” back to me on a first date without laughing. Then hyphenates. Sullivan-KnobSlauch. Dream big." },
+      { q: "A shower thought I recently had", a: "Every door I've ever opened had a knob. Every knob had a Slauch. It's a lot to carry, honestly." },
+    ],
+  },
+  {
+    id: 9,
+    name: "Sullivan Thrustworth",
+    age: 32,
+    city: "Miami, FL",
+    distance: 8,
+    occupation: "Fragrance Ambassador & Hand Model",
+    height: `6'3"`,
+    compat: 96,
+    intention: "Something serious, in black and white",
+    lastActive: "Active 12m ago",
+    img: "assets/sullivan-9.png",
+    likedYou: false,
+    seedMatch: false,
+    premium: true,
+    teaser: "The second-highest Sullivan Index ever recorded. His surname is the reason this tier exists.",
+    bio: "I've been the hand in four watch campaigns and the jaw in one cologne. I only exist in black and white; color photography makes me look “too much,” per my agent. I'm looking for someone who'll see me in color anyway.",
+    interests: ["Cufflinks", "Black-and-white film", "Fencing", "Moisturizing (both hands)", "Silence, dramatically"],
+    tags: ["Dramatically still", "Hand insured for $2M", "Brings his own lighting"],
+    fact: "Thrustworth is pronounced exactly how you fear. He's stopped correcting people because there is nothing to correct.",
+    badge: "Reserve Sullivan · Most Photographed Hand",
+    prompts: [
+      { q: "My most controversial opinion", a: "Color is a gimmick. I've never seen a sunset. I've heard they're fine." },
+      { q: "Two truths and a lie", a: "My right hand is insured. I've never raised my voice. I chose the surname Thrustworth voluntarily." },
+      { q: "Green flags I look for", a: "Someone who looks at my face before my hands. It's a low bar and yet, here I am." },
+    ],
+  },
+];
+
+// ─────────────────────────────────────────────────────────────
+// Sullivan Reserve — the premium tier.
+// Any plan unlocks all Reserve Sullivans. Higher tiers unlock
+// things we made up afterward.
+// ─────────────────────────────────────────────────────────────
+const RESERVE = {
+  name: "Sullivan Reserve",
+  count: 3,
+  annualSavingsPct: 17,
+};
+
+const RESERVE_PLANS = [
+  {
+    id: "reserve",
+    name: "Reserve",
+    tagline: "The rope is lifted. Nothing more, nothing less.",
+    monthly: 29,
+    annual: 290,
+    cta: "Lift the rope",
+    features: [
+      "Full access to all 3 Reserve Sullivans",
+      "Photos un-blurred, surnames un-withheld",
+      "Like, match, and message Reserve Sullivans",
+      "Standard Sullivan support (email, 4 business days)",
+    ],
+  },
+  {
+    id: "gold",
+    name: "Reserve Gold",
+    tagline: "For members who are serious about this.",
+    monthly: 79,
+    annual: 790,
+    popular: true,
+    cta: "Go Gold",
+    features: [
+      "Everything in Reserve",
+      "Priority placement in every Sullivan's queue",
+      "Read receipts (Sullivans see when you've seen)",
+      "One (1) handwritten note from Chudwick, annually",
+      "The quarterly Reserve Sullivan Market Report",
+    ],
+  },
+  {
+    id: "obsidian",
+    name: "Reserve Obsidian",
+    tagline: "You'll know if this is for you.",
+    monthly: 249,
+    annual: 2490,
+    cta: "Ascend",
+    features: [
+      "Everything in Reserve Gold",
+      "A dedicated Reserve concierge. His name is Sullivan.",
+      "Early access to future Sullivans, pre-verification",
+      "Name-pronunciation coaching, taught by Thrustworth",
+      "A physical velvet rope, shipped to your home",
+    ],
+  },
+];
+
+const RESERVE_FAQ = [
+  {
+    q: "Why are some Sullivans premium?",
+    a: "Their surnames. We ran the numbers and determined that names like KnobSlauch cannot be shown to the general public without a modest fee and a moment to prepare.",
+  },
+  {
+    q: "Are Reserve Sullivans more Sullivan than regular Sullivans?",
+    a: "No. All Sullivans are exactly 100% Sullivan. Reserve Sullivans simply have more happening after the Sullivan.",
+  },
+  {
+    q: "Can I cancel?",
+    a: "Yes, at any time. The Reserve Sullivans will be re-blurred and gently informed. Any Sullivan you've already matched with stays yours — we're not monsters.",
+  },
+  {
+    q: "Is this a real charge?",
+    a: "No. This is a demo. Enter any card-shaped number. Nothing is billed, no Sullivan is harmed, and the velvet rope is metaphorical (except on Obsidian).",
+  },
+  {
+    q: "Will there be more Reserve Sullivans?",
+    a: "Our sourcing team monitors all 50 states for men named Sullivan with surnames that make HR nervous. We're optimistic.",
+  },
+];
+
+// Replies used once Hope matches a Reserve Sullivan.
+const PERSONA_REPLIES = {
+  11: [
+    "Verified your message. It checks out. I verify things; it's a reflex.",
+    "People ask if it gets confusing at the Bureau. It does not. Everyone there is also named Sullivan. That's the job.",
+    "I've been told I have a serious face. It's my only face. It is very glad to hear from you.",
+  ],
+  10: [
+    "Whittled you an owl while I thought about how to reply. It came out more like a potato. Still yours.",
+    "Fun fact: the diner has a booth with a wobbly table. I fixed it in 2019. They still call it Sullivan's booth. It's ours now if you want it.",
+    "Fair warning, I bring firewood to first dates. Not as a gift. It's just always in the truck. But also as a gift.",
+  ],
+  7: [
+    "Reception's poor out here. I'm reading your messages one word at a time as they arrive. It's romantic, in a way.",
+    "I poured a Sancerre for the boat tonight. It didn't say anything. It never does. You'd like it.",
+    "Someone on the dock just called me Chadwick. I let it go. For you, I'm working on being a calmer man.",
+  ],
+  8: [
+    "GRANDPA SAYS HI. Sorry. Caps. He's just very excited about you. He invented a hinge, did I mention.",
+    "I ran 14 miles this morning and thought about your profile for 13 of them. The other mile was a hill.",
+    "Small thing: I looked up how many syllables ‘Hope KnobSlauch’ is. It's three. That's a good number. No pressure.",
+  ],
+  9: [
+    "Forgive the brevity. My right hand is in a campaign and my left is, frankly, the understudy.",
+    "I read your message twice. Once for content, once for how it would look in black and white. Both excellent.",
+    "My agent asked who I was texting. I said ‘someone who looked at my face first.’ He went quiet.",
+  ],
+};
+
+// Seeded conversations with Hope's existing matches.
+// from: "s" = the Sullivan, "h" = Hope
+const SEED_CONVERSATIONS = [
+  {
+    sullivanId: 4,
+    unread: 2,
+    messages: [
+      { from: "s", text: "Hope. Great name. Very on-brand for this app.", time: "Tue 8:14 PM" },
+      { from: "h", text: "I was about to say the exact same thing about yours.", time: "Tue 8:20 PM" },
+      { from: "s", text: "Fair. Okay — I wrote you something. Ready?", time: "Tue 8:21 PM" },
+      { from: "s", text: "“You appeared in my queue / like a natural wine — / slightly chaotic, probably great.”", time: "Tue 8:22 PM" },
+      { from: "h", text: "Is that supposed to be a haiku?", time: "Tue 9:03 PM" },
+      { from: "s", text: "It's free verse. The house pours are also free verse.", time: "Tue 9:05 PM" },
+      { from: "s", text: "Come by the bar sometime. I'll read you the long version. It has stanzas.", time: "Tue 9:06 PM" },
+    ],
+    replies: [
+      "I just letterpressed your name. It looks incredible in 48pt Caslon. This means something.",
+      "Update: I told the regulars about you. They toasted. One of them cried, but he does that.",
+      "I'm pairing this conversation with a chilled gamay. It's going superbly.",
+    ],
+  },
+  {
+    sullivanId: 3,
+    unread: 0,
+    messages: [
+      { from: "s", text: "Full disclosure: I'm off-book on three plays right now, so if I text you something dramatic at 2am, it's probably Chekhov.", time: "Mon 6:41 PM" },
+      { from: "h", text: "And if it's not Chekhov?", time: "Mon 6:52 PM" },
+      { from: "s", text: "Then it's real, and we should probably talk about it over espresso.", time: "Mon 6:53 PM" },
+      { from: "h", text: "Smooth. Was that rehearsed?", time: "Mon 7:10 PM" },
+      { from: "s", text: "…I plead the fifth. (Yes. Twice. In a mirror.)", time: "Mon 7:11 PM" },
+    ],
+    replies: [
+      "Casting update: I'm now also “Detective #3.” The range is happening, Hope.",
+      "I just did a cold read of your last message. Gave it real gravitas. The barista applauded.",
+      "Genuine question: do you prefer opening night or closing night? This tells me everything.",
+    ],
+  },
+  {
+    sullivanId: 5,
+    unread: 1,
+    messages: [
+      { from: "s", text: "ok important question. what's your walk-out song. everyone has one, even if they don't know it yet", time: "Sun 11:02 PM" },
+      { from: "h", text: "walk-out song??", time: "Sun 11:15 PM" },
+      { from: "s", text: "like the song that plays when you enter a room. mine is the Space Jam theme. non-negotiable", time: "Sun 11:16 PM" },
+      { from: "h", text: "I need to think about this seriously", time: "Sun 11:30 PM" },
+      { from: "s", text: "take your time. this determines everything. more than the algorithm tbh", time: "Sun 11:31 PM" },
+    ],
+    replies: [
+      "no pressure but I already made you a 4-track demo based on your vibe. it slaps respectfully",
+      "studio update: the old dry cleaner's sign still says “SAME DAY SERVICE” and honestly? that's my texting policy too",
+      "ok I've narrowed your walk-out song to three options. one of them is orchestral. trust the process",
+    ],
+  },
+];
+
+// Personalized match-modal copy for Sullivans who already liked Hope.
+const MATCH_COPY = {
+  2: {
+    title: "It's a Sullivan!",
+    sub: "You and Sullivan Draeger liked each other. He is, presumably, thrilled. It can be hard to tell.",
+    opener: "I don't smile in photos, but I'm smiling now. Internally. Where it counts.",
+  },
+  6: {
+    title: "98%. It happened.",
+    sub: "You and Sullivan Grimsby are the highest-rated pairing in Sullivans Meet history among men whose last name isn't also Sullivan. Our data team has been given the rest of the day off.",
+    opener: "Good evening, Hope. I ran a background check on myself and I'm pleased to report that I passed.",
+  },
+  7: {
+    title: "Chudwick has emerged from the fog.",
+    sub: "You matched with Sullivan Chudwick. He's on a pier somewhere, looking at his phone, looking pleased about it. It's hard to tell through the coat.",
+    opener: "Hope. Chudwick here. I'd have written sooner but the reception on the boat is what it is.",
+  },
+  8: {
+    title: "It's a KnobSlauch!",
+    sub: "You and Sullivan KnobSlauch liked each other. He has already told his grandmother. She's thrilled. She married the man who invented a hinge.",
+    opener: "HOPE!! Okay. Okay. I'm calm. I've been calm since you matched. Welcome to the Reserve. Do you like doors?",
+  },
+  11: {
+    title: "Sullivan. Sullivan. Sullivan.",
+    sub: "You matched with Sullivan Sullivan Sullivan. The algorithm produced a 100%, printed it, framed it, and quietly shut itself off for the evening.",
+    opener: "Hope. It's Sullivan. Sullivan Sullivan. You knew that. Hello.",
+  },
+  10: {
+    title: "It's a Pfefferknuckle!",
+    sub: "You and Sullivan Pfefferknuckle liked each other. He's already stacking wood for a fire he's calling “the first one.” He's sentimental about fires.",
+    opener: "Hi Hope. Sullivan Pfefferknuckle. Take your time with the last name, everyone does. Coffee? I know a diner where the pancakes are a warning.",
+  },
+  9: {
+    title: "In black and white: it's a match.",
+    sub: "Sullivan Thrustworth liked you back. His right hand is currently in a campaign, so he typed this with the other one.",
+    opener: "Hope. Forgive the delay — I was being photographed. It's Sullivan. Thrustworth. Yes.",
+  },
+};
+
+const DEFAULT_MATCH_COPY = {
+  title: "It's a Sullivan!",
+  sub: "You liked each other. Statistically inevitable, and yet — magic.",
+  opener: "Hi Hope. Sullivan here. Though I suppose that part was a given.",
+};
+
+// Generic fallback replies for new matches without a seeded persona.
+const GENERIC_REPLIES = [
+  "I keep rereading your profile. Excellent use of vowels.",
+  "The app says we're highly compatible and the app has never lied to me.",
+  "So. Hope. Tell me everything, starting with your stance on breakfast for dinner.",
+];
+
+const HOPE = {
+  name: "Hope",
+  initial: "H",
+  memberSince: "September 2026",
+  plan: "Sullivan+ Platinum",
+};
