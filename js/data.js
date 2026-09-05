@@ -1,6 +1,6 @@
 // ─────────────────────────────────────────────────────────────
 // Sullivans Meet — data layer
-// Eleven verified Sullivans, hand-vetted by our Nomenclature Team.
+// Twelve verified Sullivans, hand-vetted by our Nomenclature Team.
 // Three of them are Reserve Sullivans (premium: true) and sit
 // behind the Sullivan Reserve paywall until Hope upgrades.
 // ─────────────────────────────────────────────────────────────
@@ -206,6 +206,31 @@ const SULLIVANS = [
       { q: "A fact about me that surprises people", a: "I have a nickname. It's Sullivan." },
     ],
   },
+  {
+    id: 12,
+    name: "Sullivan Vandersmooth",
+    age: 33,
+    city: "Scottsdale, AZ",
+    distance: 10,
+    occupation: "Realtor & Podcast Host",
+    height: `6'0"`,
+    compat: 85,
+    intention: "Long-term. Let's circle back on timeline.",
+    lastActive: "Active now",
+    img: "assets/sullivan-12.png",
+    likedYou: true,
+    seedMatch: false,
+    bio: "Top 3% of realtors in the greater Scottsdale area (self-reported). Host of the podcast “Sullivan Speaks,” which is me, speaking. This headshot cost $400 and I stand by it. I'm not selling you anything. I'm selling you a lifestyle.",
+    interests: ["Networking (recreationally)", "Golf, badly, in a good polo", "Cold plunges", "Posting quotes over sunsets", "Open houses I'm not working"],
+    tags: ["Aggressively pleasant", "Firm handshake", "Will connect you with a guy"],
+    fact: "He has liked 4,000 profiles this week. Yours, he insists, is different. He said this with his whole face.",
+    badge: "Sullivan of the Month — Sponsored",
+    prompts: [
+      { q: "You should message me if", a: "You've ever thought “I could host a podcast.” You could. I'll have you on. Episode 41. It's a good episode." },
+      { q: "My love language is", a: "Following up. Following up on the follow-up. A quick voice memo, just checking in." },
+      { q: "Believe it or not, I", a: "Have never once said “let's circle back” and meant it. It's a reflex. Like blinking. Like closing." },
+    ],
+  },
 
   // ── Reserve Sullivans (premium) ──
   {
@@ -375,6 +400,11 @@ const RESERVE_FAQ = [
 
 // Replies used once Hope matches a Reserve Sullivan.
 const PERSONA_REPLIES = {
+  12: [
+    "Love that. Genuinely. I'm going to circle back on it in a voice memo, but the short version is: love that.",
+    "Small thing, I just closed on a house. Not for anyone. Just for the feeling. Anyway, how's your week trending?",
+    "Putting you on the podcast. Not asking. Episode 41 is yours. We'll workshop a title. “Hope Springs” is taken, unfortunately, by me.",
+  ],
   11: [
     "Verified your message. It checks out. I verify things; it's a reflex.",
     "People ask if it gets confusing at the Bureau. It does not. Everyone there is also named Sullivan. That's the job.",
@@ -478,6 +508,11 @@ const MATCH_COPY = {
     title: "It's a KnobSlauch!",
     sub: "You and Sullivan KnobSlauch liked each other. He has already told his grandmother. She's thrilled. She married the man who invented a hinge.",
     opener: "HOPE!! Okay. Okay. I'm calm. I've been calm since you matched. Welcome to the Reserve. Do you like doors?",
+  },
+  12: {
+    title: "It's a Vandersmooth!",
+    sub: "You and Sullivan Vandersmooth liked each other. He's already drafted a post about it. Sunset background. Something about “alignment.”",
+    opener: "Hope! Sullivan Vandersmooth. Great to connect. Quick one: are you more of a coffee person or a “let's do a walk-and-talk” person? No wrong answer. There's one wrong answer.",
   },
   11: {
     title: "Sullivan. Sullivan. Sullivan.",

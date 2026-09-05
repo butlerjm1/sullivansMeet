@@ -1048,6 +1048,7 @@
               [11, `<b>Sullivan Sullivan</b> was verified in your area. He verified himself. The sourcing team is still deciding how to feel about that.`, "Just now"],
               [6, `<b>Sullivan Grimsby</b> liked your profile. Our systems flagged the compatibility score for manual review. It held.`, "5m ago"],
               [10, `<b>Sullivan Pfefferknuckle</b> liked your profile, then spent forty minutes on a wood-splitting break. He's back. He's pleased.`, "40m ago"],
+              [12, `<b>Sullivan Vandersmooth</b> liked your profile and 3,999 others. He would like to connect. He has a guy.`, "1h ago"],
               [null, `Your Sullivan Index was recalculated overnight. Still <b>100% Sullivan</b>. No action needed.`, "1h ago"],
               [4, `<b>Sullivan Marchetti</b> sent you a poem. It has stanzas.`, "Tue"],
               [2, `<b>Sullivan Draeger</b> liked your profile. He did not smile while doing so, but he did do it.`, "Tue"],
@@ -1241,6 +1242,7 @@
     9: ["Which hand is this?", "Describe a sunset anyway.", "Thrustworth. Okay."],
     10: ["Pancakes as a warning?", "Pepper knuckle. Explain.", "Show me the owl."],
     11: ["Sullivan.", "Do you have a nickname?", "Verify me."],
+    12: ["Coffee. Obviously.", "What's the wrong answer?", "Do not put me on the podcast."],
     default: ["Hi, Sullivan.", "Tell me about the name.", "How's your Saturday, Sullivan?"],
   };
 
@@ -1906,7 +1908,7 @@
   function runSplash() {
     const splash = $("#splash");
     const sub = $("#splash-sub");
-    const lines = ["Curating your Sullivans…", "Removing men named Greg…", "Verifying birth certificates…", "Polishing the velvet rope…", "Eleven Sullivans found. Three are Reserve. One is extremely Sullivan."];
+    const lines = ["Curating your Sullivans…", "Removing men named Greg…", "Verifying birth certificates…", "Polishing the velvet rope…", "Twelve Sullivans found. Three are Reserve. One is extremely Sullivan."];
     let i = 0;
     const tick = setInterval(() => {
       i++;
