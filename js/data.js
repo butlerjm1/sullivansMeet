@@ -1,6 +1,6 @@
 // ─────────────────────────────────────────────────────────────
 // Sullivans Meet — data layer
-// Fourteen verified Sullivans, hand-vetted by our Nomenclature Team.
+// Fifteen verified Sullivans, hand-vetted by our Nomenclature Team.
 // Three of them are Reserve Sullivans (premium: true) and sit
 // behind the Sullivan Reserve paywall until Hope upgrades.
 // ─────────────────────────────────────────────────────────────
@@ -282,6 +282,31 @@ const SULLIVANS = [
       { q: "First round is on me if", a: "You can say Ó Súilleabháin. Second round if you can spell it. There is no third round; you'll have won the pub." },
     ],
   },
+  {
+    id: 15,
+    name: "Sullivan Throttlebottom",
+    age: 39,
+    city: "Sturgis, SD",
+    distance: 14,
+    occupation: "Motorcycle Club Treasurer & Aspiring Reader",
+    height: `6'1"`,
+    compat: 83,
+    intention: "Serious. Everything is serious.",
+    lastActive: "Active 3h ago",
+    img: "assets/sullivan-15.png",
+    likedYou: false,
+    seedMatch: false,
+    bio: "I ride. I lift. I own 400 books and I'm getting to them. This is my reading sweater; I was told it would “soften the profile.” It has not. I have a tattoo of my bike on my left arm and the name Brenda on my right, and I'd appreciate no questions about either. I know some kids. They're not mine. They're good kids.",
+    interests: ["Riding, solemnly", "First editions (unread)", "Deadlifts", "Audiobooks at 0.75x speed", "Staring at the horizon"],
+    tags: ["Takes himself seriously", "Big arms, bigger shelf", "Knows some kids"],
+    fact: "Owns 400 books and has finished none. He has finished every audiobook and considers this the same thing. The Bureau does not, but has agreed to let it go.",
+    badge: "Most Serious Sullivan (Self-Declared)",
+    prompts: [
+      { q: "Don't hate me if I", a: "Judge your bookshelf by its spines. That is how I read. That is the only way I read." },
+      { q: "A fact about me that surprises people", a: "The tattoo says Brenda. My bike's name is also Brenda. Only one of them left. I don't want to talk about which." },
+      { q: "I take pride in", a: "The kids. Not my kids. Some kids. They call me Mr. Sullivan and I have never once smiled about it, but I have thought about smiling." },
+    ],
+  },
 
   // ── Reserve Sullivans (premium) ──
   {
@@ -451,6 +476,11 @@ const RESERVE_FAQ = [
 
 // Replies used once Hope matches a Reserve Sullivan.
 const PERSONA_REPLIES = {
+  15: [
+    "Just got back from the shelf. Picked out a book for you. Didn't read it. Looked serious though. Heavy. Good spine.",
+    "Some of the kids asked who I was texting. I said a serious person. They laughed. I did not. Good kids.",
+    "Brenda says hi. The bike. Not the other one. The other one doesn't say hi anymore.",
+  ],
   14: [
     "The lads in the pub want to know if you're real. I said you are. They want proof. Send a photo of your weather.",
     "Looked up Sullivan, Illinois to see if it's a real place. It is. There's a lad there says he's more Sullivan than me. We'll see about that.",
@@ -569,6 +599,11 @@ const MATCH_COPY = {
     title: "It's a KnobSlauch!",
     sub: "You and Sullivan KnobSlauch liked each other. He has already told his grandmother. She's thrilled. She married the man who invented a hinge.",
     opener: "HOPE!! Okay. Okay. I'm calm. I've been calm since you matched. Welcome to the Reserve. Do you like doors?",
+  },
+  15: {
+    title: "Throttlebottom. Seriously.",
+    sub: "You matched with Sullivan Throttlebottom. He received the notification, nodded once, and went back to staring at the horizon.",
+    opener: "Hope. Throttlebottom. I read your profile. Well. I looked at it. Same thing. Do you ride.",
   },
   14: {
     title: "It's a Sullivan. From the source.",

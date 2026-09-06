@@ -15,7 +15,7 @@ Deploys are automatic: every push to `main` goes to production, other branches g
 
 ## Current state
 
-- **14 Sullivans** in `js/data.js`. Three are Reserve (premium): Chudwick, KnobSlauch, Thrustworth. One is in Cork (O'Sullivan, id 14, 4,600 mi); the distance filter's "Anywhere" value of 99 is treated as unlimited so he shows.
+- **15 Sullivans** in `js/data.js`. Three are Reserve (premium): Chudwick, KnobSlauch, Thrustworth. One is in Cork (O'Sullivan, id 14, 4,600 mi); the distance filter's "Anywhere" value of 99 is treated as unlimited so he shows.
 - **Sullivan Reserve** paywall: locked Sullivans are blurred with scrambled surnames until Hope buys a plan at `#/premium`. Mock checkout, nothing is charged. Membership is in-memory; refresh re-locks. A matched Reserve Sullivan stays unlocked after cancelling.
 - **Hope** is the single logged-in user. Her avatar is blue (`--hope` tokens). Copy on the Reserve page is member-neutral, not Hope-exclusive.
 - **Sullivan Sullivan** (id 11) holds the only 100% score. Grimsby's "record" copy is scoped to non-Sullivan surnames. Keep it that way if adding high scorers.
@@ -41,7 +41,8 @@ Deploys are automatic: every push to `main` goes to production, other branches g
 | `2383836` | Add Sullivan Yeehawthorne (id 13), rancher and rodeo announcer, Amarillo. Add this handoff. |
 | `039116f` | Fix handoff commit-log convention: newest row is `HEAD`, its hash is filled in by the next commit. |
 | `ffd97b3` | Add Sullivan O'Sullivan (id 14), Cork publican, the Irish Sullivan. "Anywhere" distance now unlimited; `likesBack` flag for even ids. |
-| `HEAD` | Card density toggle (comfortable / compact) on Discover, remembered per browser, compact by default on phones. |
+| `09b6502` | Card density toggle (comfortable / compact) on Discover, remembered per browser, compact by default on phones. |
+| `HEAD` | Add Sullivan Throttlebottom (id 15), serious biker, aspiring reader, Sturgis. |
 
 ## Working conventions
 
