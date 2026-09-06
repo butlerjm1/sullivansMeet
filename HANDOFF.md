@@ -15,10 +15,11 @@ Deploys are automatic: every push to `main` goes to production, other branches g
 
 ## Current state
 
-- **15 Sullivans** in `js/data.js`. Three are Reserve (premium): Chudwick, KnobSlauch, Thrustworth. One is in Cork (O'Sullivan, id 14, 4,600 mi); the distance filter's "Anywhere" value of 99 is treated as unlimited so he shows.
+- **16 Sullivans** in `js/data.js`. Four are Reserve (premium): Chudwick, KnobSlauch, Thrustworth, Tenderloin (id 16, even id with `likesBack: true` so he matches when Hope likes him). One is in Cork (O'Sullivan, id 14, 4,600 mi); the distance filter's "Anywhere" value of 99 is treated as unlimited so he shows.
 - **Sullivan Reserve** paywall: locked Sullivans are blurred with scrambled surnames until Hope buys a plan at `#/premium`. Mock checkout, nothing is charged. Membership is in-memory; refresh re-locks. A matched Reserve Sullivan stays unlocked after cancelling.
 - **Hope** is the single logged-in user. Her avatar is blue (`--hope` tokens). Copy on the Reserve page is member-neutral, not Hope-exclusive.
 - **Sullivan Sullivan** (id 11) holds the only 100% score. Grimsby's "record" copy is scoped to non-Sullivan surnames. Keep it that way if adding high scorers.
+- **Reserve count is data-driven** almost everywhere (`premiumSullivans().length`, `RESERVE.count`). The Reserve hero card fan and the Discover banner avatar pile size themselves from CSS vars (`--mid`, `--n`) set inline in `js/app.js`, so adding a fifth Reserve Sullivan needs no CSS change.
 - **Card density toggle** on the Discover toolbar: comfortable (default on desktop) or compact (default on phones, two cards per row). The only thing persisted across refreshes, via `localStorage` key `sullivans-meet:density`. Compact applies to the Reserve page previews too.
 - All other state is front-end and resets on refresh by design.
 
@@ -29,7 +30,8 @@ Deploys are automatic: every push to `main` goes to production, other branches g
 3. Add `MATCH_COPY[N]`, `PERSONA_REPLIES[N]` in `js/data.js` and `QUICK_REPLIES[N]` in `js/app.js`.
 4. Optionally add a Recent Activity line in `matchesHTML()` in `js/app.js`.
 5. Bump the count in three places: the splash line in `runSplash()` (`js/app.js`), the header comment in `js/data.js`, and the **README** (three mentions: the `js/data.js` line, the `assets/` line, and the Reserve paragraph). The Discover hero count is automatic but the number-words array in `discoverHTML()` must extend past `SULLIVANS.length`.
-6. Run `node --check js/app.js js/data.js`, eyeball it locally, commit, push, update this file.
+6. If the new Sullivan is **Reserve**, also bump the hardcoded Reserve count: `RESERVE.count` and the first plan's "Full access to all N Reserve Sullivans" feature in `js/data.js`; the premium hero lede ("N verified Sullivans"), the locked-profile CTA ("And N more Reserve Sullivans"), and the splash line in `js/app.js`; the README Reserve mentions; and the header comment in `js/data.js`. Give him a `teaser` (shown while locked).
+7. Run `node --check js/app.js js/data.js`, eyeball it locally, commit, push, update this file.
 
 ## Commit log
 
@@ -43,7 +45,8 @@ Deploys are automatic: every push to `main` goes to production, other branches g
 | `ffd97b3` | Add Sullivan O'Sullivan (id 14), Cork publican, the Irish Sullivan. "Anywhere" distance now unlimited; `likesBack` flag for even ids. |
 | `09b6502` | Card density toggle (comfortable / compact) on Discover, remembered per browser, compact by default on phones. |
 | `d666893` | Add Sullivan Throttlebottom (id 15), serious biker, aspiring reader, Sturgis. |
-| `HEAD` | Fix double-width gap in the "N% match" pill introduced by the compact-card word wrapper. |
+| `e39cd32` | Fix double-width gap in the "N% match" pill introduced by the compact-card word wrapper. |
+| `HEAD` | Add Sullivan Tenderloin (id 16), Reserve, late-night jazz radio host, Chicago. Reserve count 3 → 4 everywhere; hero fan and banner avatar pile now size from the count. |
 
 ## Working conventions
 

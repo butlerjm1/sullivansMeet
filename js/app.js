@@ -562,7 +562,7 @@
           <div>
             <div class="eyebrow">${esc(todayLabel())} · Only Sullivans shown</div>
             <h1 class="display">Welcome back, Hope.<br>Your <em>Sullivans</em> are waiting.</h1>
-            <p class="lede">We reviewed 4,212 eligible men in your area and removed everyone not named Sullivan. ${["Zero", "One", "Two", "Three", "Four", "Five", "Six", "Seven", "Eight", "Nine", "Ten", "Eleven", "Twelve", "Thirteen", "Fourteen", "Fifteen"][SULLIVANS.length] || SULLIVANS.length} remain. ${state.reserve.active ? "All of them have been told you're here." : `${premiumSullivans().length} of them are waiting behind a velvet rope.`}</p>
+            <p class="lede">We reviewed 4,212 eligible men in your area and removed everyone not named Sullivan. ${["Zero", "One", "Two", "Three", "Four", "Five", "Six", "Seven", "Eight", "Nine", "Ten", "Eleven", "Twelve", "Thirteen", "Fourteen", "Fifteen", "Sixteen"][SULLIVANS.length] || SULLIVANS.length} remain. ${state.reserve.active ? "All of them have been told you're here." : `${premiumSullivans().length} of them are waiting behind a velvet rope.`}</p>
           </div>
           <div class="hero-actions">
             <button class="btn btn-primary btn-lg" data-action="scroll-deck">${I.spark} Browse today's Sullivans</button>
@@ -662,7 +662,7 @@
     const likedYou = locked.filter((s) => s.likedYou).length;
     return `
       <section class="reserve-banner" role="region" aria-label="Sullivan Reserve">
-        <div class="stack-avatars" aria-hidden="true">
+        <div class="stack-avatars" style="--n:${locked.length}" aria-hidden="true">
           ${locked.map((s, i) => `<span class="stack-avatar" style="--i:${i}"><img class="is-blurred" src="${s.img}" alt=""></span>`).join("")}
           <span class="stack-avatar stack-avatar--lock">${I.lock}</span>
         </div>
@@ -739,7 +739,7 @@
           <div class="locked-cta">
             <div class="eyebrow">${I.crown} Sullivan Reserve</div>
             <h3 class="h3">Unlock ${esc(first(s))} ${redacted(surname(s))}</h3>
-            <p>And two more Reserve Sullivans. From ${money(planPrice(plan, "annual"))}/mo, billed annually. Cancel anytime; you won't.</p>
+            <p>And three more Reserve Sullivans. From ${money(planPrice(plan, "annual"))}/mo, billed annually. Cancel anytime; you won't.</p>
             <button class="btn btn-gold btn-lg btn-block" data-action="go-plans">${I.crown} See Reserve plans</button>
           </div>
           <div class="profile-fact">
@@ -1074,6 +1074,9 @@
               [13, `<b>Sullivan Yeehawthorne</b> was verified in your area. Verification took a while. He was on a horse.`, "2h ago"],
               [14, `<b>Sullivan O'Sullivan</b> was verified in Cork, Ireland. The Bureau's first international case. Both spellings held.`, "3h ago"],
               [15, `<b>Sullivan Throttlebottom</b> was verified in your area. He arrived on the bike, presented a library card, and left without speaking.`, "3h ago"],
+              isLocked(byId(16))
+                ? [16, `<b>A new Reserve Sullivan</b> was verified in your area. He arrived at the Bureau at four a.m., after his shift, and asked the verifier to turn the lights down.`, "4h ago", true]
+                : [16, `<b>Sullivan Tenderloin</b> was verified in your area. He arrived at the Bureau at four a.m., after his shift, and asked the verifier to turn the lights down. She did.`, "4h ago"],
               [null, `Your Sullivan Index was recalculated overnight. Still <b>100% Sullivan</b>. No action needed.`, "1h ago"],
               [4, `<b>Sullivan Marchetti</b> sent you a poem. It has stanzas.`, "Tue"],
               [2, `<b>Sullivan Draeger</b> liked your profile. He did not smile while doing so, but he did do it.`, "Tue"],
@@ -1271,6 +1274,7 @@
     13: ["Thursday works.", "Tell me about the hat.", "Which cow is Hope?"],
     14: ["Go on.", "Say it in Irish.", "Tell Mam hello."],
     15: ["I don't ride.", "Which Brenda?", "Read me something."],
+    16: ["Mm.", "Say the station.", "What's the last song?"],
     default: ["Hi, Sullivan.", "Tell me about the name.", "How's your Saturday, Sullivan?"],
   };
 
@@ -1494,7 +1498,7 @@
         <div class="reserve-hero-text">
           <div class="eyebrow">${I.crown} Sullivan Reserve</div>
           <h1 class="display">Some Sullivans are <em>premium</em>.</h1>
-          <p class="lede">Three verified Sullivans with surnames so extraordinary we had to put them behind a velvet rope. Not for exclusivity. For everyone's safety.</p>
+          <p class="lede">Four verified Sullivans with surnames so extraordinary we had to put them behind a velvet rope. Not for exclusivity. For everyone's safety.</p>
           <div class="hero-actions">
             <button class="btn btn-gold btn-lg" data-action="scroll-to" data-target="#plans">${I.crown} See plans</button>
             <button class="btn btn-ghost btn-lg" data-action="scroll-to" data-target="#reserve-preview">Peek behind the rope</button>
@@ -1506,7 +1510,7 @@
           </div>
         </div>
         <div class="reserve-hero-stack" aria-hidden="true">
-          ${prem.map((s, i) => `<div class="stack-card" style="--i:${i}"><img class="is-blurred" src="${s.img}" alt=""><span class="stack-lock">${I.lock}</span><span class="stack-label"><b>${s.compat}%</b> · ${esc(s.occupation)}</span></div>`).join("")}
+          ${prem.map((s, i) => `<div class="stack-card" style="--i:${i}; --mid:${(prem.length - 1) / 2}"><img class="is-blurred" src="${s.img}" alt=""><span class="stack-lock">${I.lock}</span><span class="stack-label"><b>${s.compat}%</b> · ${esc(s.occupation)}</span></div>`).join("")}
         </div>
       </section>
 
@@ -1950,7 +1954,7 @@
   function runSplash() {
     const splash = $("#splash");
     const sub = $("#splash-sub");
-    const lines = ["Curating your Sullivans…", "Removing men named Greg…", "Verifying birth certificates…", "Polishing the velvet rope…", "Fifteen Sullivans found. Three are Reserve. One is Irish. One is very serious."];
+    const lines = ["Curating your Sullivans…", "Removing men named Greg…", "Verifying birth certificates…", "Polishing the velvet rope…", "Sixteen Sullivans found. Four are Reserve. One is Irish. One is very serious. One is on the radio."];
     let i = 0;
     const tick = setInterval(() => {
       i++;

@@ -1,7 +1,7 @@
 // ─────────────────────────────────────────────────────────────
 // Sullivans Meet — data layer
-// Fifteen verified Sullivans, hand-vetted by our Nomenclature Team.
-// Three of them are Reserve Sullivans (premium: true) and sit
+// Sixteen verified Sullivans, hand-vetted by our Nomenclature Team.
+// Four of them are Reserve Sullivans (premium: true) and sit
 // behind the Sullivan Reserve paywall until Hope upgrades.
 // ─────────────────────────────────────────────────────────────
 
@@ -390,6 +390,34 @@ const SULLIVANS = [
       { q: "Green flags I look for", a: "Someone who looks at my face before my hands. It's a low bar and yet, here I am." },
     ],
   },
+  {
+    id: 16,
+    name: "Sullivan Tenderloin",
+    age: 52,
+    city: "Chicago, IL",
+    distance: 9,
+    occupation: "Late-Night Jazz Radio Host",
+    height: `6'2"`,
+    compat: 95,
+    intention: "Something slow. Something that lasts past the last song.",
+    lastActive: "Active now",
+    img: "assets/sullivan-16.png",
+    likedYou: false,
+    likesBack: true,
+    seedMatch: false,
+    premium: true,
+    teaser: "His voice has been described as a weighted blanket. His surname has been described as a cut of meat. Both descriptions are accurate.",
+    bio: "Midnight to four, weeknights, 91.3 FM. I play the slow records and say very little between them, which is more than most people get from me before noon. I've worn a black turtleneck every day since 1994; I own eleven and they are all the same one. Tenderloin is the family name. It predates the cut, the neighborhood, and, by my grandmother's account, most of the alphabet.",
+    interests: ["Vinyl, first pressings only", "Turtlenecks (11, identical)", "Saying “mm” meaningfully", "Chicago in the rain", "Long pauses"],
+    tags: ["Weighted-blanket voice", "Owns one turtleneck, eleven times", "Comfortable with silence"],
+    fact: "Tenderloin has never once been mispronounced. It has, however, been ordered. Twice. At restaurants where he was a guest, not the entrée.",
+    badge: "Reserve Sullivan · Most Soothing",
+    prompts: [
+      { q: "The way to win me over is", a: "Let a song finish. All the way. Through the fade. I'll know everything I need to know by how you sit through the last eight seconds." },
+      { q: "A fact about me that surprises people", a: "The voice is real. People assume it's a radio thing. It is not. I ordered a coffee once and the barista sat down." },
+      { q: "Together, we could", a: "Do the four a.m. sign-off together. I say the station, you say the weather, we let the record run out. It's the most romantic thing I know how to offer and I've offered it to no one." },
+    ],
+  },
 ];
 
 // ─────────────────────────────────────────────────────────────
@@ -399,7 +427,7 @@ const SULLIVANS = [
 // ─────────────────────────────────────────────────────────────
 const RESERVE = {
   name: "Sullivan Reserve",
-  count: 3,
+  count: 4,
   annualSavingsPct: 17,
 };
 
@@ -412,7 +440,7 @@ const RESERVE_PLANS = [
     annual: 290,
     cta: "Lift the rope",
     features: [
-      "Full access to all 3 Reserve Sullivans",
+      "Full access to all 4 Reserve Sullivans",
       "Photos un-blurred, surnames un-withheld",
       "Like, match, and message Reserve Sullivans",
       "Standard Sullivan support (email, 4 business days)",
@@ -476,6 +504,11 @@ const RESERVE_FAQ = [
 
 // Replies used once Hope matches a Reserve Sullivan.
 const PERSONA_REPLIES = {
+  16: [
+    "Mm. Good message. I read it twice and let it breathe. That's a compliment where I come from. Where I come from is the third floor of a radio station.",
+    "Played a record for you tonight around two. Didn't say your name on air. Didn't have to. The record knew.",
+    "A listener called in to ask who I was smiling at. I don't know how he knew. The voice does something when I smile. Apparently it did it for four hours.",
+  ],
   15: [
     "Just got back from the shelf. Picked out a book for you. Didn't read it. Looked serious though. Heavy. Good spine.",
     "Some of the kids asked who I was texting. I said a serious person. They laughed. I did not. Good kids.",
@@ -580,6 +613,11 @@ const SEED_CONVERSATIONS = [
 
 // Personalized match-modal copy for Sullivans who already liked Hope.
 const MATCH_COPY = {
+  16: {
+    title: "Tenderloin. Let it breathe.",
+    sub: "You matched with Sullivan Tenderloin. He saw the notification during a song and, out of respect for the song, waited until it finished. It was eleven minutes long.",
+    opener: "Hope. Sullivan Tenderloin. I'd say more, but the record's about to end and I like to be there for that. Give me eight seconds.",
+  },
   2: {
     title: "It's a Sullivan!",
     sub: "You and Sullivan Draeger liked each other. He is, presumably, thrilled. It can be hard to tell.",
