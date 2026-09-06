@@ -42,7 +42,8 @@ Deploys are automatic: every push to `main` goes to production, other branches g
 | `039116f` | Fix handoff commit-log convention: newest row is `HEAD`, its hash is filled in by the next commit. |
 | `ffd97b3` | Add Sullivan O'Sullivan (id 14), Cork publican, the Irish Sullivan. "Anywhere" distance now unlimited; `likesBack` flag for even ids. |
 | `09b6502` | Card density toggle (comfortable / compact) on Discover, remembered per browser, compact by default on phones. |
-| `HEAD` | Add Sullivan Throttlebottom (id 15), serious biker, aspiring reader, Sturgis. |
+| `d666893` | Add Sullivan Throttlebottom (id 15), serious biker, aspiring reader, Sturgis. |
+| `HEAD` | Fix double-width gap in the "N% match" pill introduced by the compact-card word wrapper. |
 
 ## Working conventions
 

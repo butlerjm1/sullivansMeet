@@ -1290,3 +1290,4 @@ svg { fill: currentColor; }
   .grid--compact .pcard-top .pill { font-size: 0.6rem; padding: 3px 6px; }
 }
 .grid--compact .pcard-top-right { margin-left: auto; }
+.compat .compat-word { margin-left: -4px; }

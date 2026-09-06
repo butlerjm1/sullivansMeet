@@ -442,7 +442,7 @@
           <div class="pcard-top">
             <span>${s.likedYou ? `<span class="pill pill--gold">${I.heart} Liked you</span>` : ""}</span>
             <span class="pcard-top-right">
-              <span class="compat">${compatRing(s.compat)} ${s.compat}%<span class="compat-word"> match</span></span>
+              <span class="compat">${compatRing(s.compat)} ${s.compat}%<span class="compat-word">match</span></span>
               <span class="pill pill--glass pill--dot" style="color:${activeRank(s) === 0 ? "#2f7a58" : "var(--ink-2)"}">${esc(s.lastActive)}</span>
             </span>
           </div>
@@ -482,7 +482,7 @@
           <div class="pcard-top">
             <span>${topLeft}</span>
             <span class="pcard-top-right">
-              <span class="compat">${compatRing(s.compat)} ${s.compat}%<span class="compat-word"> match</span></span>
+              <span class="compat">${compatRing(s.compat)} ${s.compat}%<span class="compat-word">match</span></span>
               <span class="pill pill--glass pill--dot" style="color:${activeRank(s) === 0 ? "#2f7a58" : "var(--ink-2)"}">${esc(s.lastActive)}</span>
             </span>
           </div>
@@ -724,7 +724,7 @@
             <img class="is-blurred" src="${s.img}" alt="A Reserve Sullivan, blurred">
             <div class="pcard-top">
               <span>${s.likedYou ? `<span class="pill pill--gold">${I.heart} Liked you</span>` : ""}</span>
-              <span class="compat">${compatRing(s.compat)} ${s.compat}%<span class="compat-word"> match</span></span>
+              <span class="compat">${compatRing(s.compat)} ${s.compat}%<span class="compat-word">match</span></span>
             </div>
             <div class="lock-overlay lock-overlay--lg">
               <span class="lock-glyph">${I.lock}</span>
@@ -830,7 +830,7 @@
             <img src="${s.img}" alt="${esc(s.name)}">
             <div class="pcard-top">
               <span class="pill-stack">${isPremium(s) ? reserveBadge() : ""}${s.likedYou && !matched ? `<span class="pill pill--gold">${I.heart} Liked you</span>` : matched ? `<span class="pill pill--green">${I.check} Matched</span>` : ""}</span>
-              <span class="compat">${compatRing(s.compat)} ${s.compat}%<span class="compat-word"> match</span></span>
+              <span class="compat">${compatRing(s.compat)} ${s.compat}%<span class="compat-word">match</span></span>
             </div>
             <div class="profile-photo-caption">
               <span class="pill pill--glass pill--dot" style="color:${activeRank(s) === 0 ? "#2f7a58" : "var(--ink-2)"}">${esc(s.lastActive)}</span>
