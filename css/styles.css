@@ -1012,7 +1012,7 @@ svg { fill: currentColor; }
 /* Removed from the Registry (banned) */
 .pcard--banned { border-color: rgba(180, 71, 47, 0.35); align-self: start; }
 .pcard--banned .pcard-media::after { background: linear-gradient(to top, rgba(31, 26, 22, 0.86) 0%, rgba(31, 26, 22, 0.4) 40%, rgba(31, 26, 22, 0.2) 100%); }
-.pcard-media--banned img { filter: blur(14px) saturate(0.35) contrast(0.9); }
+.pcard-media--banned img { filter: blur(7px) saturate(0.5) contrast(0.95); }
 .pcard--banned .pcard-name s { text-decoration-color: var(--accent); text-decoration-thickness: 3px; opacity: 0.75; }
 .ribbon--banned { background: linear-gradient(135deg, #c95a40, var(--accent-ink)); display: inline-flex; align-items: center; gap: 6px; }
 .ribbon--banned svg { width: 12px; height: 12px; }

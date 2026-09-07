@@ -27,7 +27,7 @@ Everything is front-end state. Refreshing the page resets Hope's day. The one ex
 
 ## Removed from the Registry
 
-Two men appear at the bottom of Discover, permanently blurred, with a red Banned ribbon and a case file explaining their violation of the Sullivan Code (one answers to "Sully," one is a Greg). They live in a separate `BANNED` array in `js/data.js`, so they're never counted, ranked, matched, or unlockable. Each card has a "Read the file" disclosure with the infraction and the Bureau's verdict.
+Two men appear at the bottom of Discover, permanently blurred, with a red Banned ribbon and a case file explaining their violation of the Sullivan Code (one answers to "Sully," one is a Todd). They live in a separate `BANNED` array in `js/data.js`, so they're never counted, ranked, matched, or unlockable. Each card has a "Read the file" disclosure with the infraction and the Bureau's verdict.
 
 ## Sullivan Reserve
 

@@ -152,7 +152,7 @@ const SULLIVANS = [
     badge: "Highest Compatibility, Non-Sullivan Surname Division",
     prompts: [
       { q: "A fact about me that surprises people", a: "I'm the reigning trivia champion at three separate bars. I've been banned from a fourth. For winning." },
-      { q: "The best way to ask me out is", a: "Directly. I once failed to realize a woman was flirting with me for eleven years. She's married now. To a man named Greg." },
+      { q: "The best way to ask me out is", a: "Directly. I once failed to realize a woman was flirting with me for eleven years. She's married now. To a man named Todd." },
       { q: "I take pride in", a: "My water quality reports and my sideburns, in that order. Some days the order flips." },
     ],
   },
@@ -577,17 +577,17 @@ const BANNED = [
   },
   {
     id: 18,
-    name: "Gregory Sullivan",
-    alias: "Greg",
+    name: "Todd Sullivan",
+    alias: "Todd",
     age: 28,
     city: "Tampa, FL",
     img: "assets/sullivan-18.png",
     caseNo: "SC-0009",
     code: "§ 1 · Name Order",
-    infraction: "Surname Sullivan. First name Greg.",
+    infraction: "Surname Sullivan. First name Todd.",
     since: "Removed at launch",
-    file: "Applied as “Sullivan, Gregory,” comma placed with intent. Passed the birth-certificate check by folding it. Passed the coffee-cup check because the barista wrote “Sullivan” on it, as baristas will. His grandmother, when reached, said “oh, Greg?” and the matter was closed. He is, we are told, a lovely man. He is also a Greg.",
-    verdict: "The Bureau's position on Gregs is a matter of public record, and of the splash screen.",
+    file: "Applied as “Sullivan, Todd,” comma placed with intent. Passed the birth-certificate check by folding it. Passed the coffee-cup check because the barista wrote “Sullivan” on it, as baristas will. His grandmother, when reached, said “oh, Todd?” and the matter was closed. He is, we are told, a lovely man. He is also a Todd.",
+    verdict: "The Bureau's position on Todds is a matter of public record, and of the splash screen.",
   },
 ];
 

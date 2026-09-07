@@ -1132,7 +1132,7 @@
                 ? [16, `<b>A new Reserve Sullivan</b> was verified in your area. He arrived at the Bureau at four a.m., after his shift, and asked the verifier to turn the lights down.`, "4h ago", true]
                 : [16, `<b>Sullivan Tenderloin</b> was verified in your area. He arrived at the Bureau at four a.m., after his shift, and asked the verifier to turn the lights down. She did.`, "4h ago"],
               [null, `Your Sullivan Index was recalculated overnight. Still <b>100% Sullivan</b>. No action needed.`, "1h ago"],
-              [null, `<b>Two men were removed from the Registry.</b> One answers to “Sully.” The other is Greg. Their files are public. Their photos are not.`, "2h ago"],
+              [null, `<b>Two men were removed from the Registry.</b> One answers to “Sully.” The other is Todd. Their files are public. Their photos are not.`, "2h ago"],
               [4, `<b>Sullivan Marchetti</b> sent you a poem. It has stanzas.`, "Tue"],
               [2, `<b>Sullivan Draeger</b> liked your profile. He did not smile while doing so, but he did do it.`, "Tue"],
               [3, `<b>Sullivan St. Croix</b> viewed your profile four times. We're told this is normal for actors.`, "Mon"],
@@ -2009,7 +2009,7 @@
   function runSplash() {
     const splash = $("#splash");
     const sub = $("#splash-sub");
-    const lines = ["Curating your Sullivans…", "Removing men named Greg…", "Verifying birth certificates…", "Polishing the velvet rope…", "Sixteen Sullivans found. Four are Reserve. One is Irish. One is on the radio. Two men were removed. One was a Greg."];
+    const lines = ["Curating your Sullivans…", "Removing men named Todd…", "Verifying birth certificates…", "Polishing the velvet rope…", "Sixteen Sullivans found. Four are Reserve. One is Irish. One is on the radio. Two men were removed. One was a Todd."];
     let i = 0;
     const tick = setInterval(() => {
       i++;
