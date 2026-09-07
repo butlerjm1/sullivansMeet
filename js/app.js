@@ -8,6 +8,8 @@
   /* ───────────── Icons ───────────── */
   const I = {
     heart: '<svg viewBox="0 0 24 24"><path d="M12 21s-7.5-4.7-10-9.3C.5 8 2.3 4.5 5.9 4.1c2-.2 3.9.8 5 2.4a.13.13 0 0 0 .2 0c1.1-1.6 3-2.6 5-2.4 3.6.4 5.4 3.9 3.9 7.6C17.5 16.3 12 21 12 21Z"/></svg>',
+    flag: '<svg viewBox="0 0 24 24"><path d="M5 3h2v18H5V3Zm3 1h11l-2.2 4.5L19 13H8V4Z"/></svg>',
+    scroll: '<svg viewBox="0 0 24 24"><path d="M6 2h12a2 2 0 0 1 2 2v14a4 4 0 0 1-4 4H6a4 4 0 0 1-4-4v-2h12v2a2 2 0 1 0 4 0V4H6v8H4V4a2 2 0 0 1 2-2Zm2 4h8v2H8V6Zm0 4h8v2H8v-2Z"/></svg>',
     ban: '<svg viewBox="0 0 24 24"><path d="M12 2a10 10 0 1 1 0 20 10 10 0 0 1 0-20Zm0 2.2a7.8 7.8 0 0 0-6.1 12.7L16.9 5.9A7.8 7.8 0 0 0 12 4.2Zm6.1 2.9L7.1 18.1A7.8 7.8 0 0 0 18.1 7.1Z"/></svg>',
     x: '<svg viewBox="0 0 24 24"><path d="M6.2 4.8 12 10.6l5.8-5.8 1.4 1.4L13.4 12l5.8 5.8-1.4 1.4L12 13.4l-5.8 5.8-1.4-1.4L10.6 12 4.8 6.2z"/></svg>',
     check: '<svg viewBox="0 0 24 24"><path d="M12 1.8 15 4l3.7.3.3 3.7 2.2 3-2.2 3-.3 3.7-3.7.3-3 2.2-3-2.2-3.7-.3-.3-3.7L2.8 12l2.2-3 .3-3.7L9 4l3-2.2Zm-1.4 13.4 5.6-5.6-1.4-1.4-4.2 4.2-2-2-1.4 1.4 3.4 3.4Z"/></svg>',
@@ -80,6 +82,8 @@
     reserve: { active: false, plan: null, billing: "annual", since: null },
     pendingScroll: null,
     density: loadDensity(),
+    // Reports Hope has filed with the Bureau: sullivan id -> { caseNo, reason }. Cases never close.
+    reports: {},
   };
   const gridClass = () => `grid${state.density === "compact" ? " grid--compact" : ""}`;
 
@@ -706,10 +710,131 @@
       <section class="section" id="banned">
         <div class="section-head">
           <h2 class="h2">Removed from the Registry <span class="count-pill count-pill--danger"><b>${BANNED.length}</b> Sullivan Code violations</span></h2>
-          <span class="small muted">Public record. Photos withheld out of decency, not membership.</span>
+          <button class="btn-text" data-action="open-code">${I.scroll} Read the Sullivan Code</button>
         </div>
         <div class="${gridClass()}">${BANNED.map(bannedCardHTML).join("")}</div>
+        <p class="small muted registry-foot">Photos withheld out of decency, not membership. Sections cited refer to the Sullivan Code, which any member may read and no member may amend.</p>
       </section>`;
+  }
+
+  /* ───────────── The Sullivan Code ───────────── */
+  function openCodeModal() {
+    const sections = SULLIVAN_CODE.sections
+      .map((sec) => {
+        if (sec.redacted) {
+          return `<section class="code-sec code-sec--redacted">
+            <h3><span class="code-num">${esc(sec.num)}</span> <span class="redacted-bar" aria-label="Redacted"></span></h3>
+            <p><span class="redacted-bar redacted-bar--long"></span><span class="redacted-bar redacted-bar--mid"></span><span class="redacted-bar redacted-bar--long"></span></p>
+            <p class="code-note">${esc(sec.text)}</p>
+          </section>`;
+        }
+        return `<section class="code-sec">
+          <h3><span class="code-num">${esc(sec.num)}</span> ${esc(sec.title)}</h3>
+          <p>${esc(sec.text)}</p>
+          ${sec.subs ? `<ol class="code-subs">${sec.subs.map(([l, t]) => `<li><span class="code-sub-l">${esc(l)}</span><span>${esc(t)}</span></li>`).join("")}</ol>` : ""}
+        </section>`;
+      })
+      .join("");
+    openModal(
+      `<div class="code-doc">
+        <button class="icon-btn modal-close" data-action="close-modal" aria-label="Close">${I.x}</button>
+        <div class="code-head">
+          <div class="eyebrow">${I.shield} Bureau of Sullivan Affairs</div>
+          <h2 class="display">The Sullivan <em>Code</em></h2>
+          <p class="code-preamble">${esc(SULLIVAN_CODE.preamble)}</p>
+        </div>
+        <div class="code-body">${sections}</div>
+        <div class="code-foot">
+          <span class="small muted">${BANNED.length} men removed under this Code. ${Object.keys(state.reports).length || "No"} case${Object.keys(state.reports).length === 1 ? "" : "s"} opened by you.</span>
+          <button class="btn btn-dark" data-action="close-modal">I have read the Code</button>
+        </div>
+      </div>`,
+      { modalClass: "modal--code" }
+    );
+  }
+
+  /* ───────────── Report a Sullivan ───────────── */
+  const nextCaseNo = () => `SC-${String(613 + Object.keys(state.reports).length).padStart(4, "0")}`;
+
+  function reportLinkHTML(s) {
+    const r = state.reports[s.id];
+    if (r) return `<button class="btn-text report-link report-link--open" data-action="open-report" data-id="${s.id}">${I.flag} Case ${esc(r.caseNo)} is open. It will remain open.</button>`;
+    return `<button class="btn-text report-link" data-action="open-report" data-id="${s.id}">${I.flag} Report to the Bureau</button>`;
+  }
+
+  function openReportModal(s) {
+    const existing = state.reports[s.id];
+    if (existing) return showReportOutcome(s, existing);
+    openModal(
+      `<div class="report">
+        <button class="icon-btn modal-close" data-action="close-modal" aria-label="Close">${I.x}</button>
+        <div class="eyebrow">${I.shield} Bureau of Sullivan Affairs · Intake</div>
+        <h2 class="h2">Report ${esc(s.name)}</h2>
+        <p class="lede">Any member may report any Sullivan for any reason (§ 7). Select the reason. The Bureau will open a case. The Bureau will not close it.</p>
+        <div class="report-list">
+          ${REPORT_REASONS.map((r) => `<button class="report-reason" data-action="file-report" data-id="${s.id}" data-reason="${r.id}"><span>${esc(r.label)}</span><span class="report-cite">${esc(r.cite)}</span></button>`).join("")}
+        </div>
+        <div class="report-foot">
+          <button class="btn-text" data-action="open-code">${I.scroll} Read the Code first</button>
+          <button class="btn btn-ghost" data-action="close-modal">Never mind</button>
+        </div>
+      </div>`,
+      { modalClass: "modal--report" }
+    );
+  }
+
+  function fileReport(s, reasonId) {
+    if (state.reports[s.id]) return showReportOutcome(s, state.reports[s.id]);
+    const reason = REPORT_REASONS.find((r) => r.id === reasonId) || REPORT_REASONS[REPORT_REASONS.length - 1];
+    const report = { caseNo: nextCaseNo(), reason: reason.id, filed: nowTime() };
+    state.reports[s.id] = report;
+    showReportOutcome(s, report);
+    // Refresh the link under the profile photo without re-rendering the page.
+    const link = $(".profile-report");
+    if (link) link.innerHTML = reportLinkHTML(s);
+  }
+
+  function reportOutcomeText(s, report) {
+    const reason = REPORT_REASONS.find((r) => r.id === report.reason);
+    if (s.id === 11) return "You have reported Sullivan Sullivan. The report was forwarded to the Bureau's senior name verifier, Sullivan Sullivan, who has reviewed it, verified it, and filed it under his own name, which is also the Bureau's name for the filing cabinet.";
+    if (isPremium(s) && report.reason === "not") return `${reason.outcome} Please note that he is a Reserve Sullivan and the Bureau checked his surname twice as hard, because it had to.`;
+    return reason.outcome;
+  }
+
+  function showReportOutcome(s, report) {
+    const reason = REPORT_REASONS.find((r) => r.id === report.reason);
+    openModal(
+      `<div class="report report--outcome">
+        <button class="icon-btn modal-close" data-action="close-modal" aria-label="Close">${I.x}</button>
+        <span class="case-stamp">Case opened</span>
+        <div class="eyebrow">${I.shield} Bureau of Sullivan Affairs · Case ${esc(report.caseNo)}</div>
+        <h2 class="h2">Re: ${esc(s.name)}</h2>
+        <div class="case-meta">
+          <span class="pill pill--danger">${I.flag} ${esc(reason.label)}</span>
+          <span class="pill">${esc(reason.cite)}</span>
+          <span class="pill">Filed ${esc(report.filed)}</span>
+          <span class="pill pill--green">${I.check} Status: open</span>
+        </div>
+        <p class="lede">${esc(reportOutcomeText(s, report))}</p>
+        <p class="small muted">This case will appear in your Recent Activity. It will not appear in his. He has not been told, unless his grandmother was involved, in which case he has been told.</p>
+        <div class="report-foot">
+          <button class="btn-text" data-action="open-code">${I.scroll} Read the Code</button>
+          <button class="btn btn-dark" data-action="close-modal">Understood</button>
+        </div>
+      </div>`,
+      { modalClass: "modal--report" }
+    );
+  }
+
+  // Recent Activity rows for cases Hope has opened, newest first.
+  function reportTimelineItems() {
+    return Object.entries(state.reports)
+      .reverse()
+      .map(([id, r]) => {
+        const s = byId(Number(id));
+        const reason = REPORT_REASONS.find((x) => x.id === r.reason);
+        return [Number(id), `You reported <b>${esc(s.name)}</b> to the Bureau: ${esc(reason.label.toLowerCase())}. Case ${esc(r.caseNo)} is open. It will remain open.`, esc(r.filed)];
+      });
   }
 
   function reserveBannerHTML() {
@@ -899,6 +1024,7 @@
               ? `<button class="btn btn-green btn-lg" data-action="open-convo" data-id="${s.id}">${I.msg} Message Sullivan</button>`
               : `<button class="action-btn action-btn--lg action-btn--like ${liked ? "is-liked" : ""}" data-action="like" data-id="${s.id}" aria-label="Like">${I.heart}</button>`}
           </div>
+          <div class="profile-report">${reportLinkHTML(s)}</div>
           <div class="profile-fact">
             ${I.star}
             <div><div class="eyebrow">Sullivan fact</div><p>${esc(s.fact)}</p></div>
@@ -1120,6 +1246,7 @@
         <div class="card" style="padding:6px 20px">
           <div class="timeline">
             ${[
+              ...reportTimelineItems(),
               isLocked(byId(8))
                 ? [8, `<b>A Reserve Sullivan</b> liked your profile. His surname has been withheld pending your membership. It's a lot of surname.`, "2m ago", true]
                 : [8, `<b>Sullivan KnobSlauch</b> liked your profile. He would like you to know he is “so, so excited.” His words. His grandmother's too.`, "2m ago"],
@@ -1508,14 +1635,14 @@
     const price = planPrice(p);
     const cta = current ? "Current plan" : r.active ? `Switch to ${p.name}` : p.cta;
     return `
-      <div class="plan ${p.popular ? "plan--popular" : ""} ${current ? "plan--current" : ""}">
-        ${p.popular ? `<span class="plan-flag">${I.star} Most popular</span>` : ""}
+      <div class="plan plan--${p.id} ${p.popular ? "plan--popular" : ""} ${current ? "plan--current" : ""}">
+        ${p.popular ? `<span class="plan-flag">${I.star} Most popular</span>` : p.id === "obsidian" ? `<span class="plan-flag plan-flag--obsidian">${I.crown} By invitation</span>` : ""}
         <div class="plan-name">${esc(p.name)}</div>
         <div class="plan-tag">${esc(p.tagline)}</div>
         <div class="plan-price"><span class="plan-cur">$</span><b>${price}</b><span class="plan-per">/mo</span></div>
         <div class="plan-bill">${r.billing === "annual" ? `Billed ${money(p.annual)} yearly · save ${RESERVE.annualSavingsPct}%` : `Billed ${money(p.monthly)} monthly`}</div>
         <ul class="plan-features">${p.features.map((f) => `<li>${I.check}<span>${esc(f)}</span></li>`).join("")}</ul>
-        <button class="btn ${p.popular ? "btn-gold" : "btn-dark"} btn-block btn-lg" data-action="choose-plan" data-plan="${p.id}" ${current ? "disabled" : ""}>${current ? I.check : I.crown} ${esc(cta)}</button>
+        <button class="btn ${p.id === "obsidian" ? "btn-ivory" : p.popular ? "btn-gold" : "btn-dark"} btn-block btn-lg" data-action="choose-plan" data-plan="${p.id}" ${current ? "disabled" : ""}>${current ? I.check : I.crown} ${esc(cta)}</button>
       </div>`;
   }
 
@@ -1869,6 +1996,15 @@
         break;
       case "close-modal":
         closeModal();
+        break;
+      case "open-code":
+        openCodeModal();
+        break;
+      case "open-report":
+        if (s) openReportModal(s);
+        break;
+      case "file-report":
+        if (s) fileReport(s, el.dataset.reason);
         break;
       case "scroll-deck":
         $("#discover").scrollIntoView({ behavior: "smooth", block: "start" });

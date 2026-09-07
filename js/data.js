@@ -621,6 +621,90 @@ const BANNED = [
   },
 ];
 
+// The Sullivan Code. Cited by every banned card and every report.
+// § 4 is redacted on purpose. Keep it that way.
+const SULLIVAN_CODE = {
+  preamble: "Ratified by the Bureau of Sullivan Affairs, Sullivan, Illinois. Read aloud at every verification, by a Sullivan, to a Sullivan. Amended never.",
+  sections: [
+    {
+      num: "§ 1",
+      title: "Name Order",
+      text: "Sullivan shall precede. Sullivan shall not follow. A man whose Sullivan follows is a surname, and the Bureau does not date surnames. A comma does not move a name. The Bureau has seen the comma.",
+    },
+    {
+      num: "§ 2",
+      title: "Diminutives",
+      text: "The name is not to be shortened, softened, or made friendly. The name is already friendly.",
+      subs: [
+        ["(a)", "“Sully.” Under no circumstances. Not to friends. Not to dogs."],
+        ["(b)", "“Van.” The Bureau is aware of the podcast."],
+        ["(c)", "“Big Sul.” Prohibited regardless of size."],
+        ["(d)", "Any form made by removing letters. Letters may be added. See: Sullivan Sullivan."],
+      ],
+    },
+    {
+      num: "§ 3",
+      title: "Recency",
+      text: "A Sullivan shall have been a Sullivan for a period of not less than one (1) lifetime. A courthouse is not a lifetime. Tuesday is not a lifetime. Enthusiasm is noted and is not a lifetime.",
+    },
+    {
+      num: "§ 4",
+      title: "",
+      redacted: true,
+      text: "The Bureau does not discuss § 4. Do not ask about § 4. The man who asked about § 4 is § 4.",
+    },
+    {
+      num: "§ 5",
+      title: "Orthography",
+      text: "Two Ls. Two Ls always. One L is a different man. Three Ls is showing off, and is permitted. The Bureau retains all forms, waivers, and gym paperwork indefinitely, and reads them.",
+    },
+    {
+      num: "§ 6",
+      title: "Conduct Toward Hope",
+      text: "A Sullivan shall reply within six (6) minutes or produce a note from a horse. A Sullivan shall not send a poem exceeding four (4) stanzas without warning. A Sullivan shall let the record finish.",
+    },
+    {
+      num: "§ 7",
+      title: "Reporting",
+      text: "Any member may report any Sullivan for any reason. The Bureau will open a case. The Bureau opens a case for everything. The Bureau has never closed one. Cases are not appeals. Appeals are also cases.",
+    },
+  ],
+};
+
+// Reasons Hope can report a Sullivan for, and how the Bureau takes each one.
+const REPORT_REASONS = [
+  {
+    id: "sully",
+    label: "Went by “Sully” in my presence",
+    cite: "§ 2(a)",
+    outcome: "A § 2(a) matter. The most serious kind. An agent has been dispatched to listen to him say his name. If he says it correctly, he will be asked to say it again, and again, until he is comfortable with it. Then a fourth time.",
+  },
+  {
+    id: "spelling",
+    label: "Spelled it with one L",
+    cite: "§ 5",
+    outcome: "Orthography. The Bureau has requested every form he has ever signed. All of them. The gym, the dentist, the yearbook. This will take some time. He has been told to keep spelling it correctly in the meantime, and to enjoy that.",
+  },
+  {
+    id: "too",
+    label: "Is too Sullivan",
+    cite: "No section",
+    outcome: "Not a violation. Noted with admiration. The Bureau has added a commendation to his file and a small asterisk to yours. This is the first report of its kind and the Bureau would like to frame it.",
+  },
+  {
+    id: "not",
+    label: "Is not a Sullivan at all",
+    cite: "§ 1",
+    outcome: "A grave charge. His birth certificate, coffee cup, and grandmother have been re-examined. All three held. His grandmother has asked who filed this, and the Bureau, out of respect for you, has told her.",
+  },
+  {
+    id: "other",
+    label: "Other",
+    cite: "§ 7",
+    outcome: "The Bureau accepts “Other.” The Bureau does not read “Other.” A case has nonetheless been opened, because the Bureau opens a case for everything, and it will remain open, because the Bureau has never closed one.",
+  },
+];
+
 // Seeded conversations with Hope's existing matches.
 // from: "s" = the Sullivan, "h" = Hope
 const SEED_CONVERSATIONS = [

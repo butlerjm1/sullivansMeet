@@ -20,6 +20,8 @@ Deploys are automatic: every push to `main` goes to production, other branches g
 - **Hope** is the single logged-in user. Her avatar is blue (`--hope` tokens). Copy on the Reserve page is member-neutral, not Hope-exclusive.
 - **Sullivan Sullivan** (id 11) holds the only 100% score. Grimsby's "record" copy is scoped to non-Sullivan surnames. Keep it that way if adding high scorers.
 - **Removed from the Registry** (banned men): a separate `BANNED` array in `js/data.js` (ids 17 Bramblewick "Sully", 18 Todd Sullivan "Todd", 19 Pratt "Dave" a Sullivan since Tuesday, 20 Tran who spelled it Sulivan once). Rendered by `bannedHTML()` at the bottom of Discover, permanently blurred with a red Banned ribbon, a case pill, and a `<details>` "Read the file" disclosure. They are not in `SULLIVANS`, so they never count, rank, filter, match, or unlock. Photos are `assets/sullivan-17.png` through `-20.png`; ids continue the Sullivan sequence so photo numbering stays unique.
+- **The Sullivan Code** (`SULLIVAN_CODE` in `js/data.js`): seven sections, § 4 redacted on purpose. Opened by `openCodeModal()` from the Registry section, the report modal, and the case outcome. Banned `code` fields and report `cite` fields refer to it; keep them consistent when adding sections.
+- **Report a Sullivan**: `reportLinkHTML()` under the profile photo on unlocked profiles. `REPORT_REASONS` in `js/data.js` holds the five reasons and outcomes. `state.reports` maps Sullivan id to `{ caseNo, reason, filed }`; case numbers start at SC-0613 and count up. Cases render into Recent Activity via `reportTimelineItems()`. Sullivan Sullivan (id 11) has a special outcome in `reportOutcomeText()`.
 - **Reserve count is data-driven** almost everywhere (`premiumSullivans().length`, `RESERVE.count`). The Reserve hero card fan and the Discover banner avatar pile size themselves from CSS vars (`--mid`, `--n`) set inline in `js/app.js`, so adding a fifth Reserve Sullivan needs no CSS change.
 - **Card density toggle** on the Discover toolbar: comfortable (default on desktop) or compact (default on phones, two cards per row). The only thing persisted across refreshes, via `localStorage` key `sullivans-meet:density`. Compact applies to the Reserve page previews too.
 - All other state is front-end and resets on refresh by design.
@@ -57,7 +59,8 @@ Deploys are automatic: every push to `main` goes to production, other branches g
 | `be54b7e` | Add Sullivan Tenderloin (id 16), Reserve, late-night jazz radio host, Chicago. Reserve count 3 → 4 everywhere; hero fan and banner avatar pile now size from the count. |
 | `24e0a7c` | Add "Removed from the Registry": two banned men (17 Sully, 18 Todd) in a separate `BANNED` array, blurred cards with case files at the bottom of Discover. |
 | `370615b` | Rename the banned man and every other Greg on the site to Todd (the splash line and Grimsby's prompt included). Banned-card blur eased from 14px to 7px. |
-| `HEAD` | Two more banned men: Pratt (19), a Sullivan since Tuesday, and Tran (20), who spelled it Sulivan once in 2019. Optional `strike` field on banned entries. |
+| `3120ec1` | Two more banned men: Pratt (19), a Sullivan since Tuesday, and Tran (20), who spelled it Sulivan once in 2019. Optional `strike` field on banned entries. |
+| `HEAD` | The Sullivan Code (modal, § 4 redacted) and Report a Sullivan (reason picker, case number, outcome, Recent Activity row). Reserve Obsidian plan card restyled as black glass with a gold edge, "By invitation" flag, ivory button; Reserve stays white, Gold stays the dark-brown popular card. |
 
 ## Working conventions
 

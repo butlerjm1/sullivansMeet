@@ -27,7 +27,11 @@ Everything is front-end state. Refreshing the page resets Hope's day. The one ex
 
 ## Removed from the Registry
 
-Four men appear at the bottom of Discover, permanently blurred, with a red Banned ribbon and a case file explaining their violation of the Sullivan Code (one answers to "Sully," one is a Todd, one has been a Sullivan since Tuesday, one spelled it with one L in 2019). They live in a separate `BANNED` array in `js/data.js`, so they're never counted, ranked, matched, or unlockable. Each card has a "Read the file" disclosure with the infraction and the Bureau's verdict.
+Four men appear at the bottom of Discover, permanently blurred, with a red Banned ribbon and a case file explaining their violation of the Sullivan Code (one answers to "Sully," one is a Todd, one has been a Sullivan since Tuesday, one spelled it with one L in 2019). They live in a separate `BANNED` array in `js/data.js`, so they're never counted, ranked, matched, or unlockable. Each card has a "Read the file" disclosure with the infraction and the Bureau's verdict. A "Read the Sullivan Code" link opens the full Code (`SULLIVAN_CODE` in `js/data.js`, seven sections, § 4 redacted).
+
+## Report a Sullivan
+
+Every unlocked profile has a "Report to the Bureau" link. Hope picks a reason (`REPORT_REASONS`), the Bureau opens a case with a number and a deadpan outcome, and the case shows up in Recent Activity on Matches. Cases never close. Reporting Sullivan Sullivan has its own outcome. Reports live in memory like everything else.
 
 ## Sullivan Reserve
 
