@@ -556,6 +556,41 @@ const PERSONA_REPLIES = {
   ],
 };
 
+// Men removed from the Sullivan Registry. Kept separate from SULLIVANS so
+// nothing that counts, ranks, filters, or matches Sullivans ever sees them.
+// Photos stay blurred permanently. There is no unlock. There is no appeal
+// (there is an appeal; it is always denied).
+const BANNED = [
+  {
+    id: 17,
+    name: "Sullivan Bramblewick",
+    alias: "Sully",
+    age: 31,
+    city: "Boulder, CO",
+    img: "assets/sullivan-17.png",
+    caseNo: "SC-0417",
+    code: "§ 2(a) · Diminutives",
+    infraction: "Answers to “Sully.”",
+    since: "Removed March 2026",
+    file: "Legally, fully, and verifiably Sullivan. Introduced himself at intake as “Sully.” Was corrected. Said “Sully” again, with finger guns. Bio contained the phrase “Sully to my friends,” and the Bureau could not verify that he has enemies. Photo was taken mid-“Sully.”",
+    verdict: "Appeal denied. The appeal was signed “Sully.”",
+  },
+  {
+    id: 18,
+    name: "Gregory Sullivan",
+    alias: "Greg",
+    age: 28,
+    city: "Tampa, FL",
+    img: "assets/sullivan-18.png",
+    caseNo: "SC-0009",
+    code: "§ 1 · Name Order",
+    infraction: "Surname Sullivan. First name Greg.",
+    since: "Removed at launch",
+    file: "Applied as “Sullivan, Gregory,” comma placed with intent. Passed the birth-certificate check by folding it. Passed the coffee-cup check because the barista wrote “Sullivan” on it, as baristas will. His grandmother, when reached, said “oh, Greg?” and the matter was closed. He is, we are told, a lovely man. He is also a Greg.",
+    verdict: "The Bureau's position on Gregs is a matter of public record, and of the splash screen.",
+  },
+];
+
 // Seeded conversations with Hope's existing matches.
 // from: "s" = the Sullivan, "h" = Hope
 const SEED_CONVERSATIONS = [

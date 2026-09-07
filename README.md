@@ -16,14 +16,18 @@ No build step, no dependencies. Either:
 ```
 index.html      shell: header, nav, mobile tab bar, footer
 css/styles.css  design system (tokens, components, responsive rules)
-js/data.js      the sixteen Sullivans (four Reserve), plans, FAQ, seeded conversations, match copy
+js/data.js      the sixteen Sullivans (four Reserve), two banned men, plans, FAQ, seeded conversations, match copy
 js/app.js       hash-routed single-page app, all state kept in memory
-assets/         the sixteen profile photos
+assets/         the sixteen profile photos, plus two banned men (17, 18)
 ```
 
 Screens: Discover (`#/discover`), full profile (`#/profile/:id`), Matches (`#/matches`), Messages (`#/messages/:id`), Sullivan Reserve plans and mock checkout (`#/premium`), Hope's profile and settings (`#/hope`).
 
 Everything is front-end state. Refreshing the page resets Hope's day. The one exception is the card-size toggle on Discover (comfortable or compact), which is remembered per browser; phones default to compact.
+
+## Removed from the Registry
+
+Two men appear at the bottom of Discover, permanently blurred, with a red Banned ribbon and a case file explaining their violation of the Sullivan Code (one answers to "Sully," one is a Greg). They live in a separate `BANNED` array in `js/data.js`, so they're never counted, ranked, matched, or unlockable. Each card has a "Read the file" disclosure with the infraction and the Bureau's verdict.
 
 ## Sullivan Reserve
 

@@ -19,6 +19,7 @@ Deploys are automatic: every push to `main` goes to production, other branches g
 - **Sullivan Reserve** paywall: locked Sullivans are blurred with scrambled surnames until Hope buys a plan at `#/premium`. Mock checkout, nothing is charged. Membership is in-memory; refresh re-locks. A matched Reserve Sullivan stays unlocked after cancelling.
 - **Hope** is the single logged-in user. Her avatar is blue (`--hope` tokens). Copy on the Reserve page is member-neutral, not Hope-exclusive.
 - **Sullivan Sullivan** (id 11) holds the only 100% score. Grimsby's "record" copy is scoped to non-Sullivan surnames. Keep it that way if adding high scorers.
+- **Removed from the Registry** (banned men): a separate `BANNED` array in `js/data.js` (ids 17 Bramblewick "Sully", 18 Gregory Sullivan "Greg"). Rendered by `bannedHTML()` at the bottom of Discover, permanently blurred with a red Banned ribbon, a case pill, and a `<details>` "Read the file" disclosure. They are not in `SULLIVANS`, so they never count, rank, filter, match, or unlock. Photos are `assets/sullivan-17.png` and `-18.png`; ids continue the Sullivan sequence so photo numbering stays unique.
 - **Reserve count is data-driven** almost everywhere (`premiumSullivans().length`, `RESERVE.count`). The Reserve hero card fan and the Discover banner avatar pile size themselves from CSS vars (`--mid`, `--n`) set inline in `js/app.js`, so adding a fifth Reserve Sullivan needs no CSS change.
 - **Card density toggle** on the Discover toolbar: comfortable (default on desktop) or compact (default on phones, two cards per row). The only thing persisted across refreshes, via `localStorage` key `sullivans-meet:density`. Compact applies to the Reserve page previews too.
 - All other state is front-end and resets on refresh by design.
@@ -33,6 +34,13 @@ Deploys are automatic: every push to `main` goes to production, other branches g
 6. If the new Sullivan is **Reserve**, also bump the hardcoded Reserve count: `RESERVE.count` and the first plan's "Full access to all N Reserve Sullivans" feature in `js/data.js`; the premium hero lede ("N verified Sullivans"), the locked-profile CTA ("And N more Reserve Sullivans"), and the splash line in `js/app.js`; the README Reserve mentions; and the header comment in `js/data.js`. Give him a `teaser` (shown while locked).
 7. Run `node --check js/app.js js/data.js`, eyeball it locally, commit, push, update this file.
 
+## Adding a banned man (checklist)
+
+1. Photo to `assets/sullivan-N.png` using the next id after the last Sullivan or banned entry.
+2. Add to `BANNED` in `js/data.js`: `name`, `alias`, `age`, `city`, `img`, `caseNo`, `code` (Sullivan Code section), `infraction` (short pill), `since`, `file` (the paragraph), `verdict`. If the first name is not Sullivan it gets struck through; otherwise the surname does.
+3. Nothing else is required. Optionally adjust the Recent Activity line in `matchesHTML()` ("Two men were removed"), the splash line, and the README count of banned men.
+4. Run `node --check js/app.js js/data.js`, eyeball it locally, commit, push, update this file.
+
 ## Commit log
 
 | Commit | What |
@@ -46,7 +54,8 @@ Deploys are automatic: every push to `main` goes to production, other branches g
 | `09b6502` | Card density toggle (comfortable / compact) on Discover, remembered per browser, compact by default on phones. |
 | `d666893` | Add Sullivan Throttlebottom (id 15), serious biker, aspiring reader, Sturgis. |
 | `e39cd32` | Fix double-width gap in the "N% match" pill introduced by the compact-card word wrapper. |
-| `HEAD` | Add Sullivan Tenderloin (id 16), Reserve, late-night jazz radio host, Chicago. Reserve count 3 → 4 everywhere; hero fan and banner avatar pile now size from the count. |
+| `be54b7e` | Add Sullivan Tenderloin (id 16), Reserve, late-night jazz radio host, Chicago. Reserve count 3 → 4 everywhere; hero fan and banner avatar pile now size from the count. |
+| `HEAD` | Add "Removed from the Registry": two banned men (17 Sully, 18 Greg) in a separate `BANNED` array, blurred cards with case files at the bottom of Discover. |
 
 ## Working conventions
 

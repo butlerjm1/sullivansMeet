@@ -8,6 +8,7 @@
   /* ───────────── Icons ───────────── */
   const I = {
     heart: '<svg viewBox="0 0 24 24"><path d="M12 21s-7.5-4.7-10-9.3C.5 8 2.3 4.5 5.9 4.1c2-.2 3.9.8 5 2.4a.13.13 0 0 0 .2 0c1.1-1.6 3-2.6 5-2.4 3.6.4 5.4 3.9 3.9 7.6C17.5 16.3 12 21 12 21Z"/></svg>',
+    ban: '<svg viewBox="0 0 24 24"><path d="M12 2a10 10 0 1 1 0 20 10 10 0 0 1 0-20Zm0 2.2a7.8 7.8 0 0 0-6.1 12.7L16.9 5.9A7.8 7.8 0 0 0 12 4.2Zm6.1 2.9L7.1 18.1A7.8 7.8 0 0 0 18.1 7.1Z"/></svg>',
     x: '<svg viewBox="0 0 24 24"><path d="M6.2 4.8 12 10.6l5.8-5.8 1.4 1.4L13.4 12l5.8 5.8-1.4 1.4L12 13.4l-5.8 5.8-1.4-1.4L10.6 12 4.8 6.2z"/></svg>',
     check: '<svg viewBox="0 0 24 24"><path d="M12 1.8 15 4l3.7.3.3 3.7 2.2 3-2.2 3-.3 3.7-3.7.3-3 2.2-3-2.2-3.7-.3-.3-3.7L2.8 12l2.2-3 .3-3.7L9 4l3-2.2Zm-1.4 13.4 5.6-5.6-1.4-1.4-4.2 4.2-2-2-1.4 1.4 3.4 3.4Z"/></svg>',
     chevL: '<svg viewBox="0 0 24 24"><path d="M15.4 5.4 8.8 12l6.6 6.6-1.4 1.4-8-8 8-8z"/></svg>',
@@ -634,6 +635,8 @@
         <div id="deck">${gridHTML()}</div>
       </section>
 
+      ${bannedHTML()}
+
       <section class="section">
         <div class="section-head">
           <h2 class="h2">How Sullivans Meet works</h2>
@@ -653,6 +656,57 @@
             <div><h4>Continuous sourcing</h4><p>We monitor all 50 states for newly single Sullivans. Average alert time is 4 minutes. We are not sure how, either.</p></div>
           </div>
         </div>
+      </section>`;
+  }
+
+  /* Removed from the Registry. Not Sullivans. Not counted. Not unlockable. */
+  function bannedCardHTML(b) {
+    const [firstName, ...rest] = b.name.split(" ");
+    const last = rest.join(" ");
+    const struck = firstName === "Sullivan" ? `Sullivan <s>${esc(last)}</s>` : `<s>${esc(firstName)}</s> ${esc(last)}`;
+    return `
+      <article class="pcard pcard--banned" data-case="${b.caseNo}">
+        <span class="ribbon ribbon--banned">${I.ban} Banned</span>
+        <div class="pcard-media pcard-media--banned">
+          <img class="is-blurred" src="${b.img}" alt="A man removed from the Sullivan Registry, blurred" loading="lazy">
+          <div class="pcard-top">
+            <span></span>
+            <span class="pcard-top-right"><span class="pill pill--glass pill--case">Case ${b.caseNo}</span></span>
+          </div>
+          <div class="lock-overlay ban-overlay">
+            <span class="lock-glyph ban-glyph">${I.ban}</span>
+            <span class="lock-title">Removed</span>
+            <span class="lock-sub">${esc(b.code)}</span>
+          </div>
+          <div class="pcard-caption">
+            <h3 class="pcard-name">${struck} <span>${b.age}</span></h3>
+            <div class="pcard-meta"><span>Goes by “${esc(b.alias)}”</span><span class="dot">·</span><span>${esc(b.city)}</span></div>
+          </div>
+        </div>
+        <div class="pcard-body">
+          <p class="pcard-bio pcard-bio--locked"><span class="pill pill--danger">${I.ban} ${esc(b.infraction)}</span></p>
+          <details class="case-file">
+            <summary>Read the file ${I.chevD}</summary>
+            <p>${esc(b.file)}</p>
+            <p class="case-verdict"><b>Verdict.</b> ${esc(b.verdict)}</p>
+          </details>
+          <div class="pcard-footer">
+            <span class="small muted">${esc(b.since)}</span>
+            <span class="small muted">No appeal · No unlock</span>
+          </div>
+        </div>
+      </article>`;
+  }
+
+  function bannedHTML() {
+    if (!BANNED.length) return "";
+    return `
+      <section class="section" id="banned">
+        <div class="section-head">
+          <h2 class="h2">Removed from the Registry <span class="count-pill count-pill--danger"><b>${BANNED.length}</b> Sullivan Code violations</span></h2>
+          <span class="small muted">Public record. Photos withheld out of decency, not membership.</span>
+        </div>
+        <div class="${gridClass()}">${BANNED.map(bannedCardHTML).join("")}</div>
       </section>`;
   }
 
@@ -1078,6 +1132,7 @@
                 ? [16, `<b>A new Reserve Sullivan</b> was verified in your area. He arrived at the Bureau at four a.m., after his shift, and asked the verifier to turn the lights down.`, "4h ago", true]
                 : [16, `<b>Sullivan Tenderloin</b> was verified in your area. He arrived at the Bureau at four a.m., after his shift, and asked the verifier to turn the lights down. She did.`, "4h ago"],
               [null, `Your Sullivan Index was recalculated overnight. Still <b>100% Sullivan</b>. No action needed.`, "1h ago"],
+              [null, `<b>Two men were removed from the Registry.</b> One answers to “Sully.” The other is Greg. Their files are public. Their photos are not.`, "2h ago"],
               [4, `<b>Sullivan Marchetti</b> sent you a poem. It has stanzas.`, "Tue"],
               [2, `<b>Sullivan Draeger</b> liked your profile. He did not smile while doing so, but he did do it.`, "Tue"],
               [3, `<b>Sullivan St. Croix</b> viewed your profile four times. We're told this is normal for actors.`, "Mon"],
@@ -1954,7 +2009,7 @@
   function runSplash() {
     const splash = $("#splash");
     const sub = $("#splash-sub");
-    const lines = ["Curating your Sullivans…", "Removing men named Greg…", "Verifying birth certificates…", "Polishing the velvet rope…", "Sixteen Sullivans found. Four are Reserve. One is Irish. One is very serious. One is on the radio."];
+    const lines = ["Curating your Sullivans…", "Removing men named Greg…", "Verifying birth certificates…", "Polishing the velvet rope…", "Sixteen Sullivans found. Four are Reserve. One is Irish. One is on the radio. Two men were removed. One was a Greg."];
     let i = 0;
     const tick = setInterval(() => {
       i++;

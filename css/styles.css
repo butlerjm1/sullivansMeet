@@ -1009,6 +1009,28 @@ svg { fill: currentColor; }
 .stack-avatar--lock { left: calc((var(--n, 3) - 1) * 30px + 30px); display: grid; place-items: center; background: linear-gradient(135deg, #d4a94f, var(--gold)); color: #fff; width: 44px; height: 44px; top: 14px; border-width: 2px; }
 .stack-avatar--lock svg { width: 18px; height: 18px; }
 
+/* Removed from the Registry (banned) */
+.pcard--banned { border-color: rgba(180, 71, 47, 0.35); align-self: start; }
+.pcard--banned .pcard-media::after { background: linear-gradient(to top, rgba(31, 26, 22, 0.86) 0%, rgba(31, 26, 22, 0.4) 40%, rgba(31, 26, 22, 0.2) 100%); }
+.pcard-media--banned img { filter: blur(14px) saturate(0.35) contrast(0.9); }
+.pcard--banned .pcard-name s { text-decoration-color: var(--accent); text-decoration-thickness: 3px; opacity: 0.75; }
+.ribbon--banned { background: linear-gradient(135deg, #c95a40, var(--accent-ink)); display: inline-flex; align-items: center; gap: 6px; }
+.ribbon--banned svg { width: 12px; height: 12px; }
+.ban-glyph { background: rgba(143, 52, 31, 0.6); border-color: rgba(255, 255, 255, 0.35); }
+.ban-glyph svg { color: #fbe3dc; }
+.pill--case { font-variant-numeric: tabular-nums; letter-spacing: 0.02em; }
+.pill--danger { background: var(--accent-soft); color: var(--accent-ink); border-color: transparent; font-style: normal; }
+.pill--danger svg { color: var(--accent); }
+.count-pill--danger b { background: var(--accent); }
+.case-file { border-top: 1px dashed var(--line); padding-top: 4px; }
+.case-file summary { list-style: none; cursor: pointer; display: flex; align-items: center; justify-content: space-between; gap: 12px; padding: 10px 0; font-weight: 600; font-size: 0.88rem; color: var(--accent-ink); }
+.case-file summary::-webkit-details-marker { display: none; }
+.case-file summary svg { width: 14px; height: 14px; color: var(--muted); transition: transform 0.25s var(--ease); flex-shrink: 0; }
+.case-file[open] summary svg { transform: rotate(180deg); }
+.case-file p { font-size: 0.86rem; color: var(--ink-2); line-height: 1.55; padding-bottom: 10px; }
+.case-verdict { border-left: 3px solid var(--accent); padding-left: 10px; color: var(--ink); }
+.case-verdict b { color: var(--accent-ink); }
+
 /* Premium page: hero */
 .reserve-hero {
   display: grid; grid-template-columns: 1.25fr 1fr; gap: 32px; align-items: center;
