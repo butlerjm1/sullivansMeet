@@ -663,7 +663,9 @@
   function bannedCardHTML(b) {
     const [firstName, ...rest] = b.name.split(" ");
     const last = rest.join(" ");
-    const struck = firstName === "Sullivan" ? `Sullivan <s>${esc(last)}</s>` : `<s>${esc(firstName)}</s> ${esc(last)}`;
+    // Strike the offending part of the name: `strike` overrides; otherwise a non-Sullivan first name, else the surname.
+    const strikeFirst = b.strike ? b.strike === "first" : firstName !== "Sullivan";
+    const struck = strikeFirst ? `<s>${esc(firstName)}</s> ${esc(last)}` : `${esc(firstName)} <s>${esc(last)}</s>`;
     return `
       <article class="pcard pcard--banned" data-case="${b.caseNo}">
         <span class="ribbon ribbon--banned">${I.ban} Banned</span>
@@ -1132,7 +1134,7 @@
                 ? [16, `<b>A new Reserve Sullivan</b> was verified in your area. He arrived at the Bureau at four a.m., after his shift, and asked the verifier to turn the lights down.`, "4h ago", true]
                 : [16, `<b>Sullivan Tenderloin</b> was verified in your area. He arrived at the Bureau at four a.m., after his shift, and asked the verifier to turn the lights down. She did.`, "4h ago"],
               [null, `Your Sullivan Index was recalculated overnight. Still <b>100% Sullivan</b>. No action needed.`, "1h ago"],
-              [null, `<b>Two men were removed from the Registry.</b> One answers to “Sully.” The other is Todd. Their files are public. Their photos are not.`, "2h ago"],
+              [null, `<b>Four men were removed from the Registry.</b> One answers to “Sully.” One is Todd. One has been a Sullivan since Tuesday. One spelled it with one L in 2019, and the Bureau has not slept since.`, "2h ago"],
               [4, `<b>Sullivan Marchetti</b> sent you a poem. It has stanzas.`, "Tue"],
               [2, `<b>Sullivan Draeger</b> liked your profile. He did not smile while doing so, but he did do it.`, "Tue"],
               [3, `<b>Sullivan St. Croix</b> viewed your profile four times. We're told this is normal for actors.`, "Mon"],
@@ -2009,7 +2011,7 @@
   function runSplash() {
     const splash = $("#splash");
     const sub = $("#splash-sub");
-    const lines = ["Curating your Sullivans…", "Removing men named Todd…", "Verifying birth certificates…", "Polishing the velvet rope…", "Sixteen Sullivans found. Four are Reserve. One is Irish. One is on the radio. Two men were removed. One was a Todd."];
+    const lines = ["Curating your Sullivans…", "Removing men named Todd…", "Verifying birth certificates…", "Polishing the velvet rope…", "Sixteen Sullivans found. Four are Reserve. One is Irish. One is on the radio. Four men were removed. One was a Todd. One was very recent."];
     let i = 0;
     const tick = setInterval(() => {
       i++;
