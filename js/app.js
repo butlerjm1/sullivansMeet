@@ -441,7 +441,7 @@
   function lockedCardHTML(s) {
     return `
       <article class="pcard pcard--locked" data-id="${s.id}">
-        <span class="ribbon ribbon--reserve">${I.crown} Reserve Sullivan</span>
+        <span class="ribbon ribbon--reserve">${I.crown} Reserve<span class="compact-word"> Sullivan</span></span>
         <div class="pcard-media" data-action="open-profile" data-id="${s.id}" role="button" tabindex="0" aria-label="Preview this Reserve Sullivan">
           <img class="is-blurred" src="${s.img}" alt="A Reserve Sullivan, blurred" loading="lazy">
           <div class="pcard-top">
@@ -481,7 +481,7 @@
     if (isPremium(s)) topLeft = `<span class="pill-stack">${reserveBadge()}${topLeft}</span>`;
     return `
       <article class="pcard ${isTop ? "pcard--top" : ""} ${isPremium(s) ? "pcard--reserve" : ""}" data-id="${s.id}">
-        ${isTop ? `<span class="ribbon">Top Sullivan pick</span>` : ""}
+        ${isTop ? `<span class="ribbon">Top<span class="compact-word"> Sullivan</span> pick</span>` : ""}
         <div class="pcard-media" data-action="open-profile" data-id="${s.id}" role="button" tabindex="0" aria-label="Open ${esc(s.name)}'s profile">
           <img src="${s.img}" alt="${esc(s.name)}" loading="lazy">
           <div class="pcard-top">
@@ -492,7 +492,7 @@
             </span>
           </div>
           <div class="pcard-caption">
-            <h3 class="pcard-name">${esc(first(s))} ${esc(surname(s))} <span>${s.age}</span> ${verifiedBadge("")}</h3>
+            <h3 class="pcard-name">${esc(first(s))} ${esc(surname(s))} <span class="pcard-name-tail"><span>${s.age}</span>${verifiedBadge("")}</span></h3>
             <div class="pcard-meta"><span>${esc(s.occupation)}</span><span class="dot">·</span><span>${esc(s.city)}</span><span class="dot">·</span><span>${s.distance.toLocaleString()} mi</span></div>
           </div>
         </div>
@@ -565,7 +565,7 @@
       <section class="hero">
         <div class="hero-greet">
           <div>
-            <div class="eyebrow">${esc(todayLabel())} · Only Sullivans shown</div>
+            <div class="eyebrow">${esc(todayLabel())}<span class="eyebrow-tail"><span class="eyebrow-dot"> · </span>Only Sullivans shown</span></div>
             <h1 class="display">Welcome back, Hope.<br>Your <em>Sullivans</em> are waiting.</h1>
             <p class="lede">We reviewed 4,212 eligible men in your area and removed everyone not named Sullivan. ${["Zero", "One", "Two", "Three", "Four", "Five", "Six", "Seven", "Eight", "Nine", "Ten", "Eleven", "Twelve", "Thirteen", "Fourteen", "Fifteen", "Sixteen"][SULLIVANS.length] || SULLIVANS.length} remain. ${state.reserve.active ? "All of them have been told you're here." : `${premiumSullivans().length} of them are waiting behind a velvet rope.`}</p>
           </div>
@@ -677,7 +677,7 @@
           <img class="is-blurred" src="${b.img}" alt="A man removed from the Sullivan Registry, blurred" loading="lazy">
           <div class="pcard-top">
             <span></span>
-            <span class="pcard-top-right"><span class="pill pill--glass pill--case">Case ${b.caseNo}</span></span>
+            <span class="pcard-top-right"><span class="pill pill--glass pill--case"><span class="compact-word">Case </span>${b.caseNo}</span></span>
           </div>
           <div class="lock-overlay ban-overlay">
             <span class="lock-glyph ban-glyph">${I.ban}</span>
@@ -1481,7 +1481,7 @@
               <h2 class="h2">Hope</h2>
               <div class="muted small" style="margin-top:4px">Member since ${esc(HOPE.memberSince)} · Founder's Circle</div>
             </div>
-            <span class="pill ${state.reserve.active ? "pill--reserve" : "pill--gold"} plan">${I.crown} ${esc(hopePlanLabel())}</span>
+            <span class="pill ${state.reserve.active ? "pill--reserve" : "pill--gold"} hope-plan">${I.crown} ${esc(hopePlanLabel())}</span>
             <p class="hope-quote">“I just think he should be named Sullivan.”<br><span class="small muted" style="font-style:normal;font-family:var(--font-body)">— Hope, founding statement</span></p>
             <div class="hope-stats">
               <div class="hope-stat"><b>${state.liked.size + state.matches.size}</b><span>Sullivans liked</span></div>
@@ -2024,8 +2024,7 @@
           b.classList.toggle("is-active", on);
           b.setAttribute("aria-pressed", on);
         });
-        if (route().view === "discover") renderDiscoverGrid();
-        else render();
+        $$(".grid").forEach((g) => g.classList.toggle("grid--compact", v === "compact"));
         break;
       }
       case "toggle-liked-you":
