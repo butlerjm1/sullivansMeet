@@ -721,7 +721,10 @@
   function bannedHTML() {
     if (!BANNED.length) return "";
     const open = state.registryOpen;
-    const teaser = BANNED.map((b) => esc(b.infraction)).join(" ");
+    // Bureau-voice teaser: the Code sections cited, with no man named. Each card's own file does the naming.
+    const words = ["No", "One", "Two", "Three", "Four", "Five", "Six", "Seven", "Eight", "Nine", "Ten"];
+    const sections = BANNED.map((b) => b.code.split("·").pop().trim()).filter((v, i, a) => a.indexOf(v) === i);
+    const teaser = `${words[BANNED.length] || BANNED.length} sealed files. Sections of the Sullivan Code cited: ${sections.map(esc).join(", ")}. No man is named until you open them.`;
     return `
       <section class="section registry ${open ? "is-open" : ""}" id="banned">
         <div class="section-head">
@@ -735,7 +738,7 @@
           <button class="btn-text" data-action="open-code">${I.scroll} Read the Sullivan Code</button>
         </div>
         <p class="registry-teaser small muted">
-          <span>Sealed by the Bureau. ${teaser}</span>
+          <span>${teaser}</span>
           <button class="btn-text" data-action="toggle-registry" aria-expanded="${open}" aria-controls="registry-fold">${I.folder} <span class="registry-toggle-label">${registryToggleLabel(open)}</span></button>
         </p>
         <div class="registry-fold" id="registry-fold">

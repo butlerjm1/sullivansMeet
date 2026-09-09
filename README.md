@@ -27,7 +27,7 @@ Everything is front-end state. Refreshing the page resets Hope's day. The two ex
 
 ## Removed from the Registry
 
-Four men sit at the bottom of Discover in a sealed section: on page load only the heading, the violation count, and a one-line teaser built from their infractions are visible. Clicking the heading or "Open the sealed files" unfolds the cards, permanently blurred, with a red Banned ribbon and a case file explaining their violation of the Sullivan Code (one answers to "Sully," one is a Todd, one has been a Sullivan since Tuesday, one spelled it with one L in 2019). They live in a separate `BANNED` array in `js/data.js`, so they're never counted, ranked, matched, or unlockable. Each card has a "Read the file" disclosure with the infraction and the Bureau's verdict. A "Read the Sullivan Code" link opens the full Code (`SULLIVAN_CODE` in `js/data.js`, seven sections, § 4 redacted).
+Four men sit at the bottom of Discover in a sealed section: on page load only the heading, the violation count, and a one-line Bureau summary of the Code sections cited are visible. Clicking the heading or "Open the sealed files" unfolds the cards, permanently blurred, with a red Banned ribbon and a case file explaining their violation of the Sullivan Code (one answers to "Sully," one is a Todd, one has been a Sullivan since Tuesday, one spelled it with one L in 2019). They live in a separate `BANNED` array in `js/data.js`, so they're never counted, ranked, matched, or unlockable. Each card has a "Read the file" disclosure with the infraction and the Bureau's verdict. A "Read the Sullivan Code" link opens the full Code (`SULLIVAN_CODE` in `js/data.js`, seven sections, § 4 redacted).
 
 ## Report a Sullivan
 
