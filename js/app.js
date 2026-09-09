@@ -9,6 +9,7 @@
   const I = {
     heart: '<svg viewBox="0 0 24 24"><path d="M12 21s-7.5-4.7-10-9.3C.5 8 2.3 4.5 5.9 4.1c2-.2 3.9.8 5 2.4a.13.13 0 0 0 .2 0c1.1-1.6 3-2.6 5-2.4 3.6.4 5.4 3.9 3.9 7.6C17.5 16.3 12 21 12 21Z"/></svg>',
     flag: '<svg viewBox="0 0 24 24"><path d="M5 3h2v18H5V3Zm3 1h11l-2.2 4.5L19 13H8V4Z"/></svg>',
+    folder: '<svg viewBox="0 0 24 24"><path d="M3 5.5A1.5 1.5 0 0 1 4.5 4h5.2l2 2.3h7.8A1.5 1.5 0 0 1 21 7.8V18.5a1.5 1.5 0 0 1-1.5 1.5h-15A1.5 1.5 0 0 1 3 18.5v-13Zm1.6 4.3v8.6h14.8V9.8H4.6Z"/></svg>',
     scroll: '<svg viewBox="0 0 24 24"><path d="M6 2h12a2 2 0 0 1 2 2v14a4 4 0 0 1-4 4H6a4 4 0 0 1-4-4v-2h12v2a2 2 0 1 0 4 0V4H6v8H4V4a2 2 0 0 1 2-2Zm2 4h8v2H8V6Zm0 4h8v2H8v-2Z"/></svg>',
     ban: '<svg viewBox="0 0 24 24"><path d="M12 2a10 10 0 1 1 0 20 10 10 0 0 1 0-20Zm0 2.2a7.8 7.8 0 0 0-6.1 12.7L16.9 5.9A7.8 7.8 0 0 0 12 4.2Zm6.1 2.9L7.1 18.1A7.8 7.8 0 0 0 18.1 7.1Z"/></svg>',
     x: '<svg viewBox="0 0 24 24"><path d="M6.2 4.8 12 10.6l5.8-5.8 1.4 1.4L13.4 12l5.8 5.8-1.4 1.4L12 13.4l-5.8 5.8-1.4-1.4L10.6 12 4.8 6.2z"/></svg>',
@@ -52,6 +53,16 @@
     try { localStorage.setItem(DENSITY_KEY, v); } catch (e) { /* ignore */ }
   }
 
+  /* ───────────── Removed from the Registry fold ─────────────
+     Sealed on page load. Remembered per browser once Hope opens it. */
+  const REGISTRY_KEY = "sullivans-meet:registry";
+  function loadRegistryOpen() {
+    try { return localStorage.getItem(REGISTRY_KEY) === "open"; } catch (e) { return false; }
+  }
+  function saveRegistryOpen(open) {
+    try { localStorage.setItem(REGISTRY_KEY, open ? "open" : "sealed"); } catch (e) { /* ignore */ }
+  }
+
   /* ───────────── State ───────────── */
   const state = {
     liked: new Set(),
@@ -82,6 +93,7 @@
     reserve: { active: false, plan: null, billing: "annual", since: null },
     pendingScroll: null,
     density: loadDensity(),
+    registryOpen: loadRegistryOpen(),
     // Reports Hope has filed with the Bureau: sullivan id -> { caseNo, reason }. Cases never close.
     reports: {},
   };
@@ -704,17 +716,47 @@
       </article>`;
   }
 
+  const registryToggleLabel = (open) => (open ? "Seal the files" : "Open the sealed files");
+
   function bannedHTML() {
     if (!BANNED.length) return "";
+    const open = state.registryOpen;
+    const teaser = BANNED.map((b) => esc(b.infraction)).join(" ");
     return `
-      <section class="section" id="banned">
+      <section class="section registry ${open ? "is-open" : ""}" id="banned">
         <div class="section-head">
-          <h2 class="h2">Removed from the Registry <span class="count-pill count-pill--danger"><b>${BANNED.length}</b> Sullivan Code violations</span></h2>
+          <h2 class="h2">
+            <button class="registry-toggle" data-action="toggle-registry" aria-expanded="${open}" aria-controls="registry-fold">
+              <span>Removed from the Registry</span>
+              <span class="count-pill count-pill--danger"><b>${BANNED.length}</b> Sullivan Code violations</span>
+              <span class="registry-chev" aria-hidden="true">${I.chevD}</span>
+            </button>
+          </h2>
           <button class="btn-text" data-action="open-code">${I.scroll} Read the Sullivan Code</button>
         </div>
-        <div class="${gridClass()}">${BANNED.map(bannedCardHTML).join("")}</div>
-        <p class="small muted registry-foot">Photos withheld out of decency, not membership. Sections cited refer to the Sullivan Code, which any member may read and no member may amend.</p>
+        <p class="registry-teaser small muted">
+          <span>Sealed by the Bureau. ${teaser}</span>
+          <button class="btn-text" data-action="toggle-registry" aria-expanded="${open}" aria-controls="registry-fold">${I.folder} <span class="registry-toggle-label">${registryToggleLabel(open)}</span></button>
+        </p>
+        <div class="registry-fold" id="registry-fold">
+          <div class="registry-inner">
+            <div class="${gridClass()}">${BANNED.map(bannedCardHTML).join("")}</div>
+            <p class="small muted registry-foot">Photos withheld out of decency, not membership. Sections cited refer to the Sullivan Code, which any member may read and no member may amend.</p>
+          </div>
+        </div>
       </section>`;
+  }
+
+  /* Opens or seals the Registry in place, without a re-render, so the fold animates. */
+  function setRegistryOpen(open) {
+    state.registryOpen = open;
+    saveRegistryOpen(open);
+    const sec = $("#banned");
+    if (!sec) return;
+    sec.classList.toggle("is-open", open);
+    $$("[data-action='toggle-registry']").forEach((b) => b.setAttribute("aria-expanded", open));
+    const label = $(".registry-toggle-label");
+    if (label) label.textContent = registryToggleLabel(open);
   }
 
   /* ───────────── The Sullivan Code ───────────── */
@@ -1999,6 +2041,9 @@
         break;
       case "open-code":
         openCodeModal();
+        break;
+      case "toggle-registry":
+        setRegistryOpen(!state.registryOpen);
         break;
       case "open-report":
         if (s) openReportModal(s);

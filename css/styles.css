@@ -1072,6 +1072,25 @@ svg { fill: currentColor; }
 .code-foot { display: flex; justify-content: space-between; align-items: center; gap: 14px; flex-wrap: wrap; margin-top: 18px; padding-top: 18px; border-top: 2px solid var(--ink); }
 .registry-foot { margin-top: 16px; max-width: 70ch; }
 
+/* The Registry fold: sealed on load, opened by the heading or the teaser link.
+   grid-template-rows 0fr -> 1fr animates height without measuring; the inner
+   visibility swap keeps sealed cards out of the tab order and the a11y tree. */
+.registry-toggle { display: inline-flex; align-items: center; gap: 12px; flex-wrap: wrap; text-align: left; font: inherit; color: inherit; border-radius: 8px; }
+.registry-toggle:hover .registry-chev { color: var(--accent-ink); }
+.registry-chev { display: inline-grid; place-items: center; width: 28px; height: 28px; border-radius: 50%; background: var(--accent-soft); color: var(--accent); transition: transform 0.3s var(--ease), color 0.18s; }
+.registry-chev svg { width: 14px; height: 14px; }
+.registry.is-open .registry-chev { transform: rotate(180deg); }
+.registry-teaser { display: flex; align-items: baseline; justify-content: space-between; gap: 8px 20px; flex-wrap: wrap; margin: -6px 0 0; max-width: none; }
+.registry-teaser > span { flex: 1 1 32ch; max-width: 70ch; line-height: 1.55; }
+.registry-teaser .btn-text { flex-shrink: 0; }
+.registry-fold { display: grid; grid-template-rows: 0fr; transition: grid-template-rows 0.45s var(--ease); }
+/* Padding and an equal negative margin cancel, so the sealed fold is 0px tall while the
+   clipped box still has room for the hover lift and shadow. The grid's own margin-top is the visible gap. */
+.registry-inner { min-height: 0; overflow: hidden; visibility: hidden; transition: visibility 0s 0.45s; padding: 20px 16px 40px; margin: -20px -16px -40px; }
+.registry-inner > .grid { margin-top: 18px; }
+.registry.is-open .registry-fold { grid-template-rows: 1fr; }
+.registry.is-open .registry-inner { visibility: visible; transition-delay: 0s; }
+
 /* Report a Sullivan */
 .profile-report { display: flex; justify-content: center; margin-top: 12px; }
 .report-link { font-size: 0.82rem; color: var(--muted); }

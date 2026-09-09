@@ -23,11 +23,11 @@ assets/         the sixteen profile photos, plus four banned men (17–20)
 
 Screens: Discover (`#/discover`), full profile (`#/profile/:id`), Matches (`#/matches`), Messages (`#/messages/:id`), Sullivan Reserve plans and mock checkout (`#/premium`), Hope's profile and settings (`#/hope`).
 
-Everything is front-end state. Refreshing the page resets Hope's day. The one exception is the card-size toggle on Discover (comfortable or compact), which is remembered per browser; phones default to compact.
+Everything is front-end state. Refreshing the page resets Hope's day. The two exceptions are remembered per browser: the card-size toggle on Discover (comfortable or compact; phones default to compact), and whether the Removed from the Registry files are open or sealed.
 
 ## Removed from the Registry
 
-Four men appear at the bottom of Discover, permanently blurred, with a red Banned ribbon and a case file explaining their violation of the Sullivan Code (one answers to "Sully," one is a Todd, one has been a Sullivan since Tuesday, one spelled it with one L in 2019). They live in a separate `BANNED` array in `js/data.js`, so they're never counted, ranked, matched, or unlockable. Each card has a "Read the file" disclosure with the infraction and the Bureau's verdict. A "Read the Sullivan Code" link opens the full Code (`SULLIVAN_CODE` in `js/data.js`, seven sections, § 4 redacted).
+Four men sit at the bottom of Discover in a sealed section: on page load only the heading, the violation count, and a one-line teaser built from their infractions are visible. Clicking the heading or "Open the sealed files" unfolds the cards, permanently blurred, with a red Banned ribbon and a case file explaining their violation of the Sullivan Code (one answers to "Sully," one is a Todd, one has been a Sullivan since Tuesday, one spelled it with one L in 2019). They live in a separate `BANNED` array in `js/data.js`, so they're never counted, ranked, matched, or unlockable. Each card has a "Read the file" disclosure with the infraction and the Bureau's verdict. A "Read the Sullivan Code" link opens the full Code (`SULLIVAN_CODE` in `js/data.js`, seven sections, § 4 redacted).
 
 ## Report a Sullivan
 
